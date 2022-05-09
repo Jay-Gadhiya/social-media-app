@@ -1,10 +1,10 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}",],
   theme: {
-    colors: {
-      'primary' : '#4285F4',
-      'white': '#ffffff',
-      'black':'#000000'
+    fontFamily: {
+      lobster : 'Lobster, cursive',
+      roboto: "Roboto,sans-serif",
+      merienda: 'Merienda One, cursive',
     },
     screens: {
       xs: "440px",
