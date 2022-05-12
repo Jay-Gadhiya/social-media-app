@@ -14,7 +14,7 @@ export const Signup = () => {
     const signupHandler = (e) => {
         e.preventDefault();
         dispatch(fetchSignupUserData(userData));
-        // navigate("/");
+        navigate("/");
     }
 
     return (

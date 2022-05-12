@@ -19,13 +19,13 @@ export const Login = () => {
 
     const guestLoginHandler = () => {
         dispatch(fetchLoginUserData(guestData));
-        // navigate('/');
+        navigate('/');
 
     }
 
     const loginHandler = (e) => {
         dispatch(fetchLoginUserData(userData));
-        // navigate('/');
+        navigate('/');
     }
 
     return (

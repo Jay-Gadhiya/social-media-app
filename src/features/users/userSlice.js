@@ -25,7 +25,7 @@ export const fetchLoginUserData = createAsyncThunk('user/fetchLoginUserData', as
 export const fetchSignupUserData = createAsyncThunk('user/fetchSignupUserData', async (userData) => {
     const response = await axios.post("/api/auth/signup", userData)
     try {
-        if(response.status === 200){
+        if(response.status === 201){
             localStorage.setItem("token", response.data.encodedToken);
             localStorage.setItem("user", JSON.stringify(response.data.createdUser));
             console.log(response);
