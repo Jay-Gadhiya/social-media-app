@@ -10,7 +10,6 @@ export const Login = () => {
     const dispatch = useDispatch();
     const error = useSelector((state) => state.error);
     const navigate = useNavigate();
-    console.log(error);
 
     const guestData = {
         username: "adarshbalika",
@@ -19,13 +18,13 @@ export const Login = () => {
 
     const guestLoginHandler = () => {
         dispatch(fetchLoginUserData(guestData));
-        navigate('/');
+        navigate('/home');
 
     }
 
     const loginHandler = (e) => {
         dispatch(fetchLoginUserData(userData));
-        navigate('/');
+        navigate('/home');
     }
 
     return (

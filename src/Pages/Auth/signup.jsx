@@ -14,7 +14,7 @@ export const Signup = () => {
     const signupHandler = (e) => {
         e.preventDefault();
         dispatch(fetchSignupUserData(userData));
-        navigate("/");
+        navigate("/home");
     }
 
     return (
@@ -64,7 +64,7 @@ export const Signup = () => {
 
                     <button  className=" rounded-md border p-1 w-full outline-none bg-blue-500 text-white hover:bg-blue-600">Sign up</button>
                     <p className="text-center">OR</p>
-                    <Link to="/login"><p className="cursor-pointer text-lg text-center">Already have an account? <span className="text-sky-600">Login</span></p></Link>
+                    <Link to="/"><p className="cursor-pointer text-lg text-center">Already have an account? <span className="text-sky-600">Login</span></p></Link>
                 </form>
             </main>
         </>

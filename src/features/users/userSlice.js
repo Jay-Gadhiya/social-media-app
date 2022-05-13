@@ -28,11 +28,9 @@ export const fetchSignupUserData = createAsyncThunk('user/fetchSignupUserData', 
         if(response.status === 201){
             localStorage.setItem("token", response.data.encodedToken);
             localStorage.setItem("user", JSON.stringify(response.data.createdUser));
-            console.log(response);
             return response.data;
         }
     } catch (error){
-        console.log(response);
         return error;
     }
     
