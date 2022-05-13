@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginImg from "../../assests/login-img.svg";
 import { fetchLoginUserData } from "../../features/users/userSlice";
 
@@ -58,7 +58,7 @@ export const Login = () => {
                     <button type="button" onClick={guestLoginHandler} className="rounded-md border p-1 w-full outline-none hover:bg-blue-500 hover:text-white">Login as a guest</button>
                     <button  className="rounded-md border p-1  w-full outline-none bg-blue-500 text-white hover:bg-blue-600">Login</button>
                     <p className="text-center">OR</p>
-                    <p className="cursor-pointer text-lg text-center">Don't have an account? <span className="text-sky-600">Sign Up</span></p>
+                    <Link to="/signup"><p className="cursor-pointer text-lg text-center">Don't have an account? <span className="text-sky-600">Sign Up</span></p></Link>
                 </form>
             </main>
         </>

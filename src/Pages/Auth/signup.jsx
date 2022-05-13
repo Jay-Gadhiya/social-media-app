@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchSignupUserData } from "../../features/users/userSlice";
 
 
@@ -64,7 +64,7 @@ export const Signup = () => {
 
                     <button  className=" rounded-md border p-1 w-full outline-none bg-blue-500 text-white hover:bg-blue-600">Sign up</button>
                     <p className="text-center">OR</p>
-                    <p className="cursor-pointer text-lg text-center">Already have an account? <span className="text-sky-600">Login</span></p>
+                    <Link to="/login"><p className="cursor-pointer text-lg text-center">Already have an account? <span className="text-sky-600">Login</span></p></Link>
                 </form>
             </main>
         </>
