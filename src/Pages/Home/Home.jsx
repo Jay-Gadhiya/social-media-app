@@ -3,14 +3,14 @@ import { ImHome } from 'react-icons/im';
 import { MdAddBox } from 'react-icons/md';
 import { MdExplore } from 'react-icons/md';
 import { IoNotificationsSharp } from 'react-icons/io5';
-const { Navbar } = require("../../Components/Navbar/navbar")
 const { PostCard } = require("../../Components/Post-Card/post-card")
 
+
 export const HomePage = () => {
+ 
 
     return(
         <>
-            <Navbar />
              <main className="flex justify-center gap-4 mt-5 font-roboto p-2 relative">
                    <div>
                         <PostCard />
