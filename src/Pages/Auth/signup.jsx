@@ -6,9 +6,8 @@ import { fetchSignupUserData } from "../../features/users/userSlice";
 
 export const Signup = () => {
 
-    const [userData, setUserData] = useState({firstName : '', lastName : '', username : '', password : ''});
+    const [userData, setUserData] = useState({firstName : '', lastName : '', username : '', password : '',  email: "", bio:"", website : ""});
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user);
     const navigate = useNavigate();
 
     const signupHandler = (e) => {
@@ -48,9 +47,19 @@ export const Signup = () => {
                     rounded-md border-slate-300 
                     border-primary focus:border-sky-500
                     focus:ring-1 focus:ring-sky-500." 
-                    value={userData.email}
+                    value={userData.username}
                     onChange={(e) => setUserData(pre => ({...pre, username : e.target.value}))}
                     type="username" id="username" placeholder="username*" required/>
+
+                    <input 
+                    className=" w-full p-2 pl-2 focus: outline-none 
+                    border
+                    rounded-md border-slate-300 
+                    border-primary focus:border-sky-500
+                    focus:ring-1 focus:ring-sky-500" 
+                    value={userData.email}
+                    onChange={(e) => setUserData(pre => ({...pre, email : e.target.value}))}
+                    type="email" id="email" placeholder="email*" required/>
 
                     <input 
                     className=" w-full p-2 pl-2 focus: outline-none 

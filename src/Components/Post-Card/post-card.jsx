@@ -5,13 +5,14 @@ import { BsBookmark } from 'react-icons/bs';
 
 export const PostCard = () => {
     return (
-        <div className="w-full max-w-xl border font-roboto pb-3 mb-3">
+        <div className="w-full max-w-xl  border-2 font-roboto pb-3 mb-3 rounded-lg">
             <div className="flex items-center gap-3 p-3">
                 <img className='w-9 h-9 rounded-full' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" />
                 <p>Admin user</p>
             </div>
-            <div className="w-full">
-                <img src="https://media.smallbiztrends.com/2021/01/Active-Social-Media-Presence.png" alt="Image" />
+            <div className="w-full pl-3 pr-2">
+                {/* <img src="https://media.smallbiztrends.com/2021/01/Active-Social-Media-Presence.png" alt="Image" /> */}
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim commodi, optio doloremque ab repellat amet esse, sed, recusandae laboriosam obcaecati hic corrupti corporis!
             </div>
             <div className='flex justify-between p-3 items-center'>
                 <div className='flex gap-4'>
