@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { BsX } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEditUser } from '../../features/userProfile/userProfileSlice';
+import { fetchEditUser } from '../../features/users/userSlice';
+import { BsCardImage } from "react-icons/bs";
 
-export function EditProfile({ setShowModal }) {
+export function EditProfile({ setShowModal, setImg, img }) {
 
   const dispatch = useDispatch();
   const userProfileData = useSelector(state => state.userProfile);
-  const authUser = useSelector(state => state.user);
-  const [userData, setUserData] = useState({...userProfileData.profileUser});
-  const token = authUser.token;
+  const authUserData = useSelector(state => state.user);
+  const [userData, setUserData] = useState({...authUserData.user});
+  const token = authUserData.token;
 
 
   const userDataChangeHandler = (e) => {
@@ -19,6 +20,18 @@ export function EditProfile({ setShowModal }) {
   const updateDataHandler = () => {
     dispatch(fetchEditUser({userData, token}));
     setShowModal(false);
+  }
+
+  const imgHandler = (e) => {
+    let reader = new FileReader();
+
+    reader.readAsDataURL(e.target.files[0]);
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImg(reader.result);
+      }
+    }
   }
 
   return (
@@ -33,17 +46,14 @@ export function EditProfile({ setShowModal }) {
                  <div className="flex flex-col gap-6 ">
                         <div className="flex items-center">
                             <label htmlFor="avatar">Avatar</label>
-                            <img className=' ml-[5rem] block bg-center bg-no-repeat bg-cover w-12 h-12 cursor-pointer rounded-full border  shadow-lg' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" />
+                            <div className=" ml-[5rem]">
+                                <label className="cursor-pointer">
+                                  <img className='w-14 h-14 rounded-full' src={img} alt="profile-img" />
+                                  <input onChange={(e) => imgHandler(e)} accept="image/*" type="file" className="hidden" />
+                                </label>
+                            </div>
                         </div>
 
-                        <div className="flex gap-5 items-center">
-                            <label htmlFor="avatar">User Name</label>
-                            <input 
-                            onChange={(e) => userDataChangeHandler(e)} 
-                            value={userData.username}
-                            className=" lg:ml-[1.2rem]  lg:w-[14rem]  border p-1 rounded-md border-slate-300 border-primary focus:border-sky-500
-                            outline-none" type="text" name="username" id="username" />
-                        </div>
 
                         <div className="flex gap-5 items-center">
                             <label htmlFor="avatar">Website</label>

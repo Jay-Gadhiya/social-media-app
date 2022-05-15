@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { EditProfile } from '../../Components/Modal/edit-profile-modal';
 import { PostCard } from "../../Components/Post-Card/post-card";
+import { fetchGetUser } from '../../features/userProfile/userProfileSlice';
 import { logoutUser } from '../../features/users/userSlice';
 
 export const ProfilePage = () => {
 
   const [showModal, setShowModal] = useState(false);
-  const profileData = useSelector(state => state.userProfile);
+  const [img, setImg] = useState("https://nebulaui.netlify.app/images/medium.jpeg");
+  const userData = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,24 +20,24 @@ export const ProfilePage = () => {
       navigate("/");
   }
 
-  console.log(profileData);
 
+  
     return (
         <>
         {
             showModal 
             &&
-            <EditProfile setShowModal={setShowModal}  />
+            <EditProfile setShowModal={setShowModal} setImg={setImg} img={img}  />
 
         }
         <div className="max-w-2xl mx-auto"> 
             <div className="px-3 py-4">  
                 <div className="flex flex-col gap-1 text-center">
-                    <img className='block mx-auto bg-center bg-no-repeat bg-cover w-24 h-24 rounded-full border  shadow-lg' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" />
-                    <p className="font-serif font-bold"> {profileData.profileUser.username} </p>
-                    <span className="text-sm text-gray-500">{profileData.profileUser.firstName} {profileData.profileUser?.lastName}</span>
-                    <span className="text-sm text-gray-500">{profileData.profileUser.bio}</span>
-                    <a href="social-media-nznbx22rl-jay-gadhiya.vercel.app" className="text-sm text-sky-500 cursor-pointer">{profileData.profileUser.website}</a>
+                    <img className='block mx-auto bg-center bg-no-repeat bg-cover w-24 h-24 rounded-full border  shadow-lg' src={img} alt="profile-img" />
+                    <p className="font-serif font-bold"> {userData.user.username} </p>
+                    <span className="text-sm text-gray-500">{userData.user.firstName} {userData.user.lastName}</span>
+                    <span className="text-sm text-gray-500">{userData.user.bio}</span>
+                    <a href="social-media-nznbx22rl-jay-gadhiya.vercel.app" className="text-sm text-sky-500 cursor-pointer">{userData.user.website}</a>
                 </div>
     
                 <div className="flex justify-center items-center gap-2 my-3">
