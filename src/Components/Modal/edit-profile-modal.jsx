@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { BsX } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditUser } from '../../features/users/userSlice';
-import { BsCardImage } from "react-icons/bs";
 
 export function EditProfile({ setShowModal, setImg, img }) {
 

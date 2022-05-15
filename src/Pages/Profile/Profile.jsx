@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { EditProfile } from '../../Components/Modal/edit-profile-modal';
 import { PostCard } from "../../Components/Post-Card/post-card";
-import { fetchGetUser } from '../../features/userProfile/userProfileSlice';
 import { logoutUser } from '../../features/users/userSlice';
 
 export const ProfilePage = () => {
