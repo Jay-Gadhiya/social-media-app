@@ -3,10 +3,20 @@ import { ImHome } from 'react-icons/im';
 import { MdAddBox } from 'react-icons/md';
 import { MdExplore } from 'react-icons/md';
 import { IoNotificationsSharp } from 'react-icons/io5';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchAllUsers } from "../../features/users/userSlice";
 const { PostCard } = require("../../Components/Post-Card/post-card")
 
 
 export const HomePage = () => {
+
+    const dispatch = useDispatch();
+    const allUsers = useSelector(store => store.user);
+
+    useEffect(() => {
+        dispatch(fetchAllUsers());
+    }, [])
  
 
     return(

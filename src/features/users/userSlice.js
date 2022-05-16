@@ -6,6 +6,7 @@ import { editUserService, getAllUsersService, getUserService } from "../../servi
 const initialState = {
     token : JSON.parse(localStorage.getItem('user'))?.token || "",
     user : JSON.parse(localStorage.getItem('user'))?.user || "",
+    allUsers : [],
     error : ""
 }
 
@@ -112,7 +113,7 @@ const userSlice = createSlice({
 
 
         builder.addCase(fetchAllUsers.pending, state => {
-            state.allUsers = [];
+            state.error = "";
         })
 
         builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
@@ -125,11 +126,11 @@ const userSlice = createSlice({
 
 
         builder.addCase(fetchGetUser.pending, state => {
-            state.profileUser = "";
+            state.user = "";
         })
 
         builder.addCase(fetchGetUser.fulfilled, (state, action) => {
-            state.profileUser = action.payload;
+            state.user = action.payload;
         })
 
         builder.addCase(fetchGetUser.rejected, (state, action) => {

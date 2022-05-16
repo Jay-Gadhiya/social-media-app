@@ -6,7 +6,6 @@ import { fetchEditUser } from '../../features/users/userSlice';
 export function EditProfile({ setShowModal, setImg, img }) {
 
   const dispatch = useDispatch();
-  const userProfileData = useSelector(state => state.userProfile);
   const authUserData = useSelector(state => state.user);
   const [userData, setUserData] = useState({...authUserData.user});
   const token = authUserData.token;
