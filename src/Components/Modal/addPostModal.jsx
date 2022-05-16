@@ -28,8 +28,12 @@ export const AddPostModal = ({setShowModal}) => {
                     </div>
                 </div>
 
-                <div class="flex justify-end mt-4">
-                    <button className="modal-close py-2 bg-blue-500 px-6 rounded-md text-white hover:bg-blue-400">Post</button>
+                <div class="flex justify-between mt-4  lg:w-80 ml-auto items-center ">
+                    <label htmlFor="img">
+                        <BsCardImage className="text-2xl text-blue-500 cursor-pointer" />
+                        <input type="file" name="img" id="img" className="hidden" />
+                    </label>
+                    <button className="modal-close py-2 bg-cyan-500 px-6 rounded-md text-white hover:bg-blue-400">Post</button>
                 </div>
                 
             </div>

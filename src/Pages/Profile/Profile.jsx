@@ -46,24 +46,24 @@ export const ProfilePage = () => {
         <div className="max-w-2xl mx-auto"> 
             <div className="px-3 py-4">  
                 <div className="flex flex-col gap-1 text-center">
-                    <img className='block mx-auto bg-center bg-no-repeat bg-cover w-24 h-24 rounded-full border  shadow-lg' src={currentUser?.img} alt='img' />
-                    <p className="font-serif font-bold"> {currentUser?.username} </p>
-                    <span className="text-sm text-gray-500">{currentUser?.firstName} {currentUser?.lastName}</span>
-                    <span className="text-sm text-gray-500">{currentUser?.bio}</span>
+                    <img className='block mx-auto bg-center bg-no-repeat bg-cover w-24 h-24 rounded-full border-2 border-sky-50' src={currentUser?.img} alt='img' />
+                    <p className="font-serif font-bold text-white"> {currentUser?.username} </p>
+                    <span className="text-sm text-gray-300">{currentUser?.firstName} {currentUser?.lastName}</span>
+                    <span className="text-sm text-gray-300">{currentUser?.bio}</span>
                     <a href="social-media-nznbx22rl-jay-gadhiya.vercel.app" className="text-sm text-sky-500 cursor-pointer">{currentUser?.website}</a>
                 </div>
     
                 <div className="flex justify-center items-center gap-2 my-3">
                     <div className="font-semibold text-center mr-4 ml-10">
-                        <p className="text-black">102</p>
+                        <p className="text-slate-300">102</p>
                         <span className="text-gray-400">Posts</span>
                     </div>
                     <div className="font-semibold text-center mx-4">
-                        <p className="text-black">102</p>
+                        <p className="text-slate-300">102</p>
                         <span className="text-gray-400">Followers</span>
                     </div>
                     <div className="font-semibold text-center mx-4">
-                        <p className="text-black">102</p>
+                        <p className="text-slate-300">102</p>
                         <span className="text-gray-400">Folowing</span>
                     </div>
                 </div>
@@ -72,12 +72,12 @@ export const ProfilePage = () => {
                     {
                         findUser?.username === userData.user?.username
                         ?
-                        <button onClick={() => setShowModal(true)} className="bg-white border border-blue-500 hover:bg-blue-500 hover:text-white px-5 py-2 rounded-full ">Edit Profile</button>
+                        <button onClick={() => setShowModal(true)} className="bg-white border border-blue-500 hover:bg-cyan-500 hover:text-white px-5 py-2 rounded-full ">Edit Profile</button>
                         :
                         <button onClick={() => setShowModal(true)} className="bg-white border border-blue-500 hover:bg-blue-500 hover:text-white px-5 py-2 rounded-full ">Edit Profile</button>
 
                     }
-                    <AiOutlineLogout onClick={logOutHandler} className='text-[2rem] cursor-pointer hover:text-blue-500' />
+                    <AiOutlineLogout onClick={logOutHandler} className='text-[2rem] text-white cursor-pointer hover:text-blue-500' />
                 </div>
             </div>
         </div>

@@ -38,7 +38,7 @@ export function EditProfile({ setShowModal, img }) {
           >
             <div className="relative w-full my-6 mx-auto max-w-[24rem]">
              
-              <div className="border-4 border-black-300 p-4 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">     
+              <div className=" p-4 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">     
                  <div className="w-full text-[2.6rem] cursor-pointer flex justify-end"><BsX onClick={() => setShowModal(false)} /></div>
                  <div className="flex flex-col gap-6 ">
                         <div className="flex items-center">
@@ -70,7 +70,7 @@ export function EditProfile({ setShowModal, img }) {
                             outline-none" name="bio" id="bio" cols="30" rows="4" ></textarea>
                         </div>
                         <div className="flex w-full justify-end">
-                            <button onClick={updateDataHandler}  className="rounded-md border px-3 py-1 outline-none bg-blue-500 text-white hover:bg-blue-600">Update</button>
+                            <button onClick={updateDataHandler}  className="rounded-md border px-3 py-1 outline-none bg-cyan-500 text-white hover:bg-cyan-600">Update</button>
                         </div>
                  </div> 
                
