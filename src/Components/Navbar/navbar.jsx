@@ -27,7 +27,7 @@ export const Navbar = () => {
                    <MdExplore className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-blue-500 text-zinc-500'/>
                    <IoNotificationsSharp className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-blue-500 text-zinc-500'/>
                     <div className="w-8 h-8 cursor-pointer ">
-                       <Link to={`/profile/${authUser.user.username}`}><img className=' w-8 h-8 rounded-full' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" /></Link>
+                       <Link to={`/profile/${authUser.user?.username}`}><img className=' w-8 h-8 rounded-full' src={authUser.user?.img} alt="profile-img" /></Link>
                     </div>
                 </div>
             </div>

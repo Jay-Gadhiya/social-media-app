@@ -6,7 +6,7 @@ import { fetchSignupUserData } from "../../features/users/userSlice";
 
 export const Signup = () => {
 
-    const [userData, setUserData] = useState({firstName : '', lastName : '', username : '', password : '',  email: "", bio:"", website : ""});
+    const [userData, setUserData] = useState({firstName : '', lastName : '', username : '', password : '',  email: "", bio:"", website : "", img : ""});
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

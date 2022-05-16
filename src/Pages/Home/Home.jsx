@@ -12,7 +12,7 @@ const { PostCard } = require("../../Components/Post-Card/post-card")
 export const HomePage = () => {
 
     const dispatch = useDispatch();
-    const allUsers = useSelector(store => store.user);
+    const authUser = useSelector(store => store.user);
 
     useEffect(() => {
         dispatch(fetchAllUsers());
@@ -31,10 +31,10 @@ export const HomePage = () => {
                     </div>
                     <div className="w-max h-max mt-5 hidden lg:block">
                         <div className="flex gap-2 justify-center items-center">
-                            <img className='w-16 h-16 rounded-full' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" />
-                            <p>Admin user</p>
+                            <img className='w-16 h-16 rounded-full' src={authUser.user?.img} alt="profile-img" />
+                            <p>{authUser.user?.username}</p>
                         </div>
-                        <p className="text-blue-400 mt-4 mb-4">Suggestions for you</p>
+                        <p className="text-blue-400 mt-4 mb-4 text-center ml-5">Suggestions for you</p>
                         <div className="flex flex-col gap-3 ">
                             <User imgUrl = {"https://picsum.photos/seed/picsum/200/300"}/>
                             <User imgUrl = {"https://picsum.photos/seed/picsum/200/300"}/>

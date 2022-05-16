@@ -3,13 +3,12 @@ import { BsX } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditUser } from '../../features/users/userSlice';
 
-export function EditProfile({ setShowModal, setImg, img }) {
+export function EditProfile({ setShowModal, img }) {
 
   const dispatch = useDispatch();
   const authUserData = useSelector(state => state.user);
   const [userData, setUserData] = useState({...authUserData.user});
   const token = authUserData.token;
-
 
   const userDataChangeHandler = (e) => {
     setUserData(pre => ({...pre, [e.target.name] : e.target.value}));
@@ -27,7 +26,7 @@ export function EditProfile({ setShowModal, setImg, img }) {
 
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setImg(reader.result);
+        setUserData(pre => ({...pre, img : reader.result}));
       }
     }
   }
@@ -46,8 +45,8 @@ export function EditProfile({ setShowModal, setImg, img }) {
                             <label htmlFor="avatar">Avatar</label>
                             <div className=" ml-[5rem]">
                                 <label className="cursor-pointer">
-                                  <img className='w-14 h-14 rounded-full' src={img} alt="profile-img" />
-                                  <input onChange={(e) => imgHandler(e)} accept="image/*" type="file" className="hidden" />
+                                  <img className='w-14 h-14 rounded-full' src={userData.img} alt="profile-img" />
+                                  <input onChange={(e) => imgHandler(e)} name= "img" accept="image/*" type="file" className="hidden" />
                                 </label>
                             </div>
                         </div>

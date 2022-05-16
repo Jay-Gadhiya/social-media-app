@@ -40,7 +40,6 @@ export const fetchAllUsers = createAsyncThunk("userProfile/fetchAllUsers", async
     try {
         const response = await getAllUsersService();
         if(response.status === 200){
-            console.log(response);
             return response.data;
         }
     } catch (error){
