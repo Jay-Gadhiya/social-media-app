@@ -4,14 +4,39 @@ import { IoPaperPlaneOutline } from 'react-icons/io5';
 import { BsBookmark } from 'react-icons/bs';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDeletePost } from '../../features/posts/postSlice';
+import { EditPostModal } from '../Modal/editPostModal';
 
 
 export const PostCard = ({ postData }) => {
 
     const [openMenu, setOpenMenu] = useState(false);
+    const [postsData, setPostsData] = useState({caption:postData?.caption, content:postData?.content, image: postData?.image});
+    const [showModal, setShowModal] = useState(false);
+    const dispatch = useDispatch();
+    const { token, user } = useSelector(store => store.user);
+    const postId = postData?._id;
+
+
+    const deletePostHandler = () => {
+        dispatch(fetchDeletePost({token, postId}));
+        setOpenMenu(open => !open);
+    }
+
+    const editHandler = () => {
+        setOpenMenu(open => !open);
+        setShowModal(true);
+    }
 
 
     return (
+        <>
+        {
+            showModal 
+            &&
+            <EditPostModal setShowModal={setShowModal} setPostsData={setPostsData} postsData={postsData} postId={postData?._id}  />
+        }
         <div className="w-full max-w-xl  font-roboto pb-3 mb-3 pr-1 rounded-lg bg-gray-700">
             <div className="flex items-center gap-3 p-3">
                 <img className='w-9 h-9 rounded-full' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" />
@@ -22,8 +47,18 @@ export const PostCard = ({ postData }) => {
                         openMenu
                         &&
                         <div className='absolute top-4 right-4 py-1 px-2 bg-gray-600  rounded-md flex gap-1 text-white flex-col'>
-                            <div onClick={() => setOpenMenu(open => !open)} className='cursor-pointer text-sm hover:text-cyan-500'>Edit</div>
-                            <div onClick={() => setOpenMenu(open => !open)} className='cursor-pointer text-sm hover:text-cyan-500'>Delete</div>
+                            {
+                                user?.username === postData?.username
+                                ?
+                                <>
+                                    <div onClick={editHandler} className='cursor-pointer text-sm hover:text-cyan-500'>Edit</div>
+                                    <div onClick={deletePostHandler} className='cursor-pointer text-sm hover:text-cyan-500'>Delete</div>
+                                </>
+                                :
+                                    <div onClick={() => setOpenMenu(open => !open)} className='cursor-pointer text-sm hover:text-cyan-500'>Unfollow</div>
+                                
+                            }
+                            
                         </div>
                     }
                     
@@ -33,7 +68,7 @@ export const PostCard = ({ postData }) => {
                 {
                     postData?.image !== "" 
                     &&
-                    <img className='rounded-md bg-contain bg-center w-full' src={postData?.image} alt="Image" />
+                    <img className='rounded-md bg-cover bg-center w-full' src={postData?.image} alt="Image" />
                 }
             </div>
             <p className='text-white pl-3 mb-1 mt-1'>{postData?.content}</p>
@@ -51,5 +86,6 @@ export const PostCard = ({ postData }) => {
             <p className='text-sm pl-3 text-gray-300'><span className='font-bold '>{postData?.username} </span>{postData?.caption}</p>
             <small className='text-gray-400 pl-3'>12 hours ago</small>
         </div>
+        </>
     )
 }

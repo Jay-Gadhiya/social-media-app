@@ -37,7 +37,6 @@ export const fetchPostByUsername = createAsyncThunk("post/fetchPostByUsername", 
 export const fetchCreatePost = createAsyncThunk("post/fetchCreatePost", async ({postData, token}) => {
     try {
         const response = await createPostService(token, postData);
-        console.log(response);
         return response.data;
 
     } catch (error) {
@@ -45,17 +44,19 @@ export const fetchCreatePost = createAsyncThunk("post/fetchCreatePost", async ({
     }
 })
 
-export const fetchDeletePost = createAsyncThunk("post/fetchDeletePost", async (token, postId) => {
+export const fetchDeletePost = createAsyncThunk("post/fetchDeletePost", async ({token, postId}) => {
     try {
         const response = await deletePostService(token, postId);
+        return response.data;
     } catch (error) {
         return error;
     }
 })
 
-export const fetchEditPost = createAsyncThunk("post/fetchEditPost", async (token, postId, postData) => {
+export const fetchEditPost = createAsyncThunk("post/fetchEditPost", async ({token, postId, postData}) => {
     try {
         const response = await editPostService(token, postId, postData);
+        return response.data
     } catch (error) {
         return error;
     }
@@ -131,7 +132,7 @@ const postSlice = createSlice({
         })
 
         builder.addCase(fetchDeletePost.fulfilled, (state, action) => {
-            state.posts = action.payload;
+            state.posts = action.payload.posts;
         })
 
         builder.addCase(fetchDeletePost.rejected, (state, action) => {
@@ -145,7 +146,7 @@ const postSlice = createSlice({
         })
 
         builder.addCase(fetchEditPost.fulfilled, (state, action) => {
-            state.posts = action.payload;
+            state.posts = action.payload?.posts;
         })
 
         builder.addCase(fetchEditPost.rejected, (state, action) => {

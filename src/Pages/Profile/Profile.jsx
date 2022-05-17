@@ -88,6 +88,8 @@ export const ProfilePage = () => {
         <div className=' flex flex-col gap-3 items-center p-1'>
             {
                 posts?.map(item => (
+                    item.username === findUser.username
+                    &&
                     <PostCard key={item?._id} postData = {item} />
                 ))
             }

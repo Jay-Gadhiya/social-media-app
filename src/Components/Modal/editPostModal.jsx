@@ -2,18 +2,18 @@ import { useState } from "react";
 import { BsCardImage } from "react-icons/bs";
 import { VscChromeClose } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPost, fetchCreatePost } from "../../features/posts/postSlice";
+import { fetchEditPost } from "../../features/posts/postSlice";
 
 
-export const AddPostModal = ({setShowModal}) => {
+export const EditPostModal = ({ setShowModal, setPostsData, postsData, postId }) => {
 
     const dispatch = useDispatch();
     const authUser = useSelector(store => store.user);
-    const [postData, setPostData] = useState({caption:"", content:"", image: ""});
     const token = authUser?.token;
+    const postData = postsData;
 
     const postDataHandler = (e) => {
-        setPostData(pre => ({...pre, [e.target.name] : e.target.value}));
+        setPostsData(pre => ({...pre, [e.target.name] : e.target.value}));
     }
 
     const imgHandler = (e) => {
@@ -23,13 +23,13 @@ export const AddPostModal = ({setShowModal}) => {
     
         reader.onload = () => {
           if (reader.readyState === 2) {
-            setPostData(pre => ({...pre, image : reader.result}));
+            setPostsData(pre => ({...pre, image : reader.result}));
           }
         }
     }
 
-    const createPostHandler = () => {
-        dispatch(fetchCreatePost({postData, token})); 
+    const editPostHandler = () => {
+        dispatch(fetchEditPost({token, postId, postData})); 
         setShowModal(false);
     }
 
@@ -51,8 +51,8 @@ export const AddPostModal = ({setShowModal}) => {
                 <div className="flex gap-4 w-full">
                     <img className='w-14 h-14  rounded-full' src={authUser.user?.img} alt="profile-img" />
                     <div className="flex flex-col w-full gap-4">
-                        <input onChange={e => postDataHandler(e)} value={postData?.caption} className="rounded-md border-2 p-1 w-full max-w-sm outline-green-400" type="text" placeholder="caption" name="caption" />
-                        <textarea onChange={e => postDataHandler(e)} value={postData?.content} className="border-2 rounded-md p-1 w-full max-w-sm outline-green-400" placeholder="Write something awsome..." name="content" id="post" cols="25" rows="4"></textarea>
+                        <input onChange={e => postDataHandler(e)} value={postsData?.caption} className="rounded-md border-2 p-1 w-full max-w-sm outline-green-400" type="text" placeholder="caption" name="caption" />
+                        <textarea onChange={e => postDataHandler(e)} value={postsData?.content} className="border-2 rounded-md p-1 w-full max-w-sm outline-green-400" placeholder="Write something awsome..." name="content" id="post" cols="25" rows="4"></textarea>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@ export const AddPostModal = ({setShowModal}) => {
                         <BsCardImage className="text-2xl text-blue-500 cursor-pointer" />
                         <input onChange={e => imgHandler(e)} type="file" name="image" id="img" className="hidden" />
                     </label>
-                    <button  onClick={createPostHandler} className="modal-close py-2 bg-cyan-500 px-6 rounded-md text-white hover:bg-blue-400">Post</button>
+                    <button  onClick={editPostHandler} className="modal-close py-2 bg-cyan-500 px-6 rounded-md text-white hover:bg-blue-400">Update</button>
                 </div>
                 
             </div>
