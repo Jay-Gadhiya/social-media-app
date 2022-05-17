@@ -146,7 +146,7 @@ const postSlice = createSlice({
         })
 
         builder.addCase(fetchEditPost.fulfilled, (state, action) => {
-            state.posts = action.payload?.posts;
+            state.posts = action.payload?.posts.reverse();
         })
 
         builder.addCase(fetchEditPost.rejected, (state, action) => {

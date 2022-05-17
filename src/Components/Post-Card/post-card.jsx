@@ -51,11 +51,11 @@ export const PostCard = ({ postData }) => {
                                 user?.username === postData?.username
                                 ?
                                 <>
-                                    <div onClick={editHandler} className='cursor-pointer text-sm hover:text-cyan-500'>Edit</div>
-                                    <div onClick={deletePostHandler} className='cursor-pointer text-sm hover:text-cyan-500'>Delete</div>
+                                    <div onClick={editHandler} className='cursor-pointer text-base hover:text-cyan-500'>Edit</div>
+                                    <div onClick={deletePostHandler} className='cursor-pointer text-base hover:text-cyan-500'>Delete</div>
                                 </>
                                 :
-                                    <div onClick={() => setOpenMenu(open => !open)} className='cursor-pointer text-sm hover:text-cyan-500'>Unfollow</div>
+                                    <div onClick={() => setOpenMenu(open => !open)} className='cursor-pointer text-base hover:text-cyan-500'>Unfollow</div>
                                 
                             }
                             

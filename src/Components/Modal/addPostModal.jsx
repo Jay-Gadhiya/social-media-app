@@ -61,6 +61,9 @@ export const AddPostModal = ({setShowModal}) => {
                         <BsCardImage className="text-2xl text-blue-500 cursor-pointer" />
                         <input onChange={e => imgHandler(e)} type="file" name="image" id="img" className="hidden" />
                     </label>
+                    <div className="w-16 h-14 pt-4 ">
+                        <img className="bg-contain bg-center" src={postData?.image}  />
+                    </div>
                     <button  onClick={createPostHandler} className="modal-close py-2 bg-cyan-500 px-6 rounded-md text-white hover:bg-blue-400">Post</button>
                 </div>
                 
