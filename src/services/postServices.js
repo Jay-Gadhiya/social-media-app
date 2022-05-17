@@ -13,9 +13,9 @@ export const getPostByUserNameService = (username) => {
 };
 
 
-export const createPostService = (token, post) => {
+export const createPostService = (token, postData) => {
     return axios.post("/api/posts",
-      { post },
+      { postData },
       {
         headers: {
           authorization: token,

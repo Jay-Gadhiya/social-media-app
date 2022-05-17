@@ -1,11 +1,39 @@
+import { useState } from "react";
 import { BsCardImage } from "react-icons/bs";
 import { VscChromeClose } from "react-icons/vsc";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllPost, fetchCreatePost } from "../../features/posts/postSlice";
 
 
 export const AddPostModal = ({setShowModal}) => {
 
+    const dispatch = useDispatch();
     const authUser = useSelector(store => store.user);
+    const [postData, setPostData] = useState({caption:"", content:"", image: ""});
+    const token = authUser?.token;
+
+    const postDataHandler = (e) => {
+        setPostData(pre => ({...pre, [e.target.name] : e.target.value}));
+    }
+
+    const imgHandler = (e) => {
+        let reader = new FileReader();
+    
+        reader.readAsDataURL(e.target.files[0]);
+    
+        reader.onload = () => {
+          if (reader.readyState === 2) {
+            setPostData(pre => ({...pre, image : reader.result}));
+          }
+        }
+    }
+
+    const createPostHandler = () => {
+        dispatch(fetchCreatePost({postData, token}));
+        setShowModal(false);
+    }
+
+
 
     return (
         <>
@@ -23,17 +51,17 @@ export const AddPostModal = ({setShowModal}) => {
                 <div className="flex gap-4 w-full">
                     <img className='w-14 h-14  rounded-full' src={authUser.user?.img} alt="profile-img" />
                     <div className="flex flex-col w-full gap-4">
-                        <input className="rounded-md border-2 p-1 w-full max-w-sm outline-green-400" type="text" placeholder="caption" name="caption" />
-                        <textarea className="border-2 rounded-md p-1 w-full max-w-sm outline-green-400" placeholder="Write something awsome..." name="post" id="post" cols="25" rows="4"></textarea>
+                        <input onChange={e => postDataHandler(e)} className="rounded-md border-2 p-1 w-full max-w-sm outline-green-400" type="text" placeholder="caption" name="caption" />
+                        <textarea onChange={e => postDataHandler(e)} className="border-2 rounded-md p-1 w-full max-w-sm outline-green-400" placeholder="Write something awsome..." name="content" id="post" cols="25" rows="4"></textarea>
                     </div>
                 </div>
 
-                <div class="flex justify-between mt-4  lg:w-80 ml-auto items-center ">
+                <div className="flex justify-between mt-4  lg:w-80 ml-auto items-center ">
                     <label htmlFor="img">
                         <BsCardImage className="text-2xl text-blue-500 cursor-pointer" />
-                        <input type="file" name="img" id="img" className="hidden" />
+                        <input onChange={e => imgHandler(e)} type="file" name="image" id="img" className="hidden" />
                     </label>
-                    <button className="modal-close py-2 bg-cyan-500 px-6 rounded-md text-white hover:bg-blue-400">Post</button>
+                    <button  onClick={createPostHandler} className="modal-close py-2 bg-cyan-500 px-6 rounded-md text-white hover:bg-blue-400">Post</button>
                 </div>
                 
             </div>

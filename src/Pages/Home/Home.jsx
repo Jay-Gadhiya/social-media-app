@@ -6,28 +6,32 @@ import { IoNotificationsSharp } from 'react-icons/io5';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAllUsers } from "../../features/users/userSlice";
-const { PostCard } = require("../../Components/Post-Card/post-card")
-
+import { PostCard } from "../../Components/Post-Card/post-card";
+import { fetchAllPost } from "../../features/posts/postSlice";
 
 export const HomePage = () => {
 
     const dispatch = useDispatch();
     const authUser = useSelector(store => store.user);
+    const postData = useSelector(store => store.post);
+
 
     useEffect(() => {
         dispatch(fetchAllUsers());
+        dispatch(fetchAllPost());
     }, [])
- 
+    
+
 
     return(
         <>
-             <main className="flex justify-center gap-4 mt-5 font-roboto p-2 relative">
-                   <div>
-                        <PostCard />
-                        <PostCard />
-                        <PostCard />
-                        <PostCard />
-                        <PostCard />
+             <main className="flex justify-center gap-4 mt-5 font-roboto p-2 relative mb-[3rem]">
+                    <div>
+                       {
+                          postData?.posts?.map(item => (
+                               <PostCard key={item?._id} postData = {item} />
+                           ))
+                       }
                     </div>
                     <div className="w-max h-max mt-5 hidden lg:block">
                         <div className="flex gap-2 justify-center items-center">
@@ -43,10 +47,10 @@ export const HomePage = () => {
                         </div>
                     </div>
                     <div className="w-full md:hidden flex justify-between fixed bottom-0 p-3 bg-gray-800">
-                        <ImHome className='text-2xl cursor-pointer hover:text-blue-500 text-zinc-400'/>
-                        <MdAddBox className='text-3xl cursor-pointer hover:text-blue-500 text-zinc-400'/>
-                        <MdExplore className='text-3xl cursor-pointer hover:text-blue-500 text-zinc-400'/>
-                        <IoNotificationsSharp className='text-3xl cursor-pointer hover:text-blue-500 text-zinc-400'/>
+                        <ImHome className='text-2xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
+                        <MdAddBox className='text-3xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
+                        <MdExplore className='text-3xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
+                        <IoNotificationsSharp className='text-3xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
                     </div>
             </main>
         </>

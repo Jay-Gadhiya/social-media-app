@@ -12,6 +12,7 @@ const initialState = {
 export const fetchAllPost = createAsyncThunk("post/fetchAllPost", async () => {
     try {
         const response = await getAllPostService();
+        return response.data;
     } catch (error) {
         return error;
     }
@@ -33,9 +34,12 @@ export const fetchPostByUsername = createAsyncThunk("post/fetchPostByUsername", 
     }
 })
 
-export const fetchCreatePost = createAsyncThunk("post/fetchCreatePost", async (token, post) => {
+export const fetchCreatePost = createAsyncThunk("post/fetchCreatePost", async ({postData, token}) => {
     try {
-        const response = await createPostService(token, post);
+        const response = await createPostService(token, postData);
+        console.log(response);
+        return response.data;
+
     } catch (error) {
         return error;
     }
@@ -57,9 +61,8 @@ export const fetchEditPost = createAsyncThunk("post/fetchEditPost", async (token
     }
 })
 
-
 const postSlice = createSlice({
-    name : post,
+    name : "post",
     initialState,
     
     reducers : {},
@@ -72,7 +75,7 @@ const postSlice = createSlice({
         })
 
         builder.addCase(fetchAllPost.fulfilled, (state, action) => {
-            state.posts = action.payload;
+            state.posts = action.payload?.posts.reverse();
         })
 
         builder.addCase(fetchAllPost.rejected, (state, action) => {
@@ -114,7 +117,7 @@ const postSlice = createSlice({
         })
 
         builder.addCase(fetchCreatePost.fulfilled, (state, action) => {
-            state.posts = action.payload;
+            state.posts = action.payload?.posts.reverse();
         })
 
         builder.addCase(fetchCreatePost.rejected, (state, action) => {
@@ -150,3 +153,5 @@ const postSlice = createSlice({
         })
     }
 })
+
+export default postSlice.reducer;

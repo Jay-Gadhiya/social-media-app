@@ -20,7 +20,7 @@ export const Signup = () => {
         <>
             <main className="flex lg:justify-center gap-5 items-center w-full h-full m-4">
                 <form onSubmit={(e) => signupHandler(e)} className="flex flex-col p-3 border gap-2 w-full max-w-[20rem] rounded-lg">
-                    <h1 className="font-merienda text-4xl text-center mb-10">FanField</h1>
+                    <h1 className="font-merienda text-4xl text-center mb-10 text-[#fde4c3]">FanField</h1>
                     <input 
                     className=" w-full p-2 pl-2 focus: outline-none 
                     border
@@ -71,9 +71,9 @@ export const Signup = () => {
                     onChange={(e) => setUserData(pre => ({...pre, password : e.target.value}))}
                     type="password" id="password" placeholder="pasword*" required/>
 
-                    <button  className=" rounded-md border p-1 w-full outline-none bg-blue-500 text-white hover:bg-blue-600">Sign up</button>
-                    <p className="text-center">OR</p>
-                    <Link to="/"><p className="cursor-pointer text-lg text-center">Already have an account? <span className="text-sky-600">Login</span></p></Link>
+                    <button  className=" rounded-md  p-1 w-full outline-none bg-cyan-500 text-white hover:bg-cyan-600">Sign up</button>
+                    <p className="text-center text-white">OR</p>
+                    <Link to="/"><p className="cursor-pointer text-lg text-center text-white">Already have an account? <span className="text-sky-600">Login</span></p></Link>
                 </form>
             </main>
         </>

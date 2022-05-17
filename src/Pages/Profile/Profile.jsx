@@ -11,6 +11,7 @@ export const ProfilePage = () => {
   const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState("https://nebulaui.netlify.app/images/medium.jpeg");
   const userData = useSelector(state => state.user);
+  const { posts } = useSelector(store => store.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { username } = useParams();
@@ -85,9 +86,11 @@ export const ProfilePage = () => {
         <div className='border w-1/3 mr-auto ml-auto mt-3 mb-3'></div>
 
         <div className=' flex flex-col gap-3 items-center p-1'>
-            <PostCard />
-            <PostCard />
-            <PostCard />
+            {
+                posts?.map(item => (
+                    <PostCard key={item?._id} postData = {item} />
+                ))
+            }
         </div>
         </>
     )
