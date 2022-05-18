@@ -74,9 +74,9 @@ export const PostCard = ({ postData }) => {
             <p className='text-white pl-3 mb-1 mt-1'>{postData?.content}</p>
             <div className='flex justify-between p-3 items-center'>
                 <div className='flex gap-4'>
-                    <BsHeart className='text-xl text-white cursor-pointer hover:text-blue-500 hover:scale-105'/>
-                    <FaRegComment className='text-xl text-white cursor-pointer hover:text-blue-500 hover:scale-105'/>
-                    <IoPaperPlaneOutline className='text-[1.4rem] text-white cursor-pointer hover:text-blue-500 hover:scale-105'/>
+                    <BsHeart className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
+                    <FaRegComment className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
+                    <IoPaperPlaneOutline className='text-[1.4rem] text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
                 </div>
                 <div>
                     <BsBookmark className='text-xl text-white cursor-pointer hover:text-blue-500 hover:scale-105'/>
