@@ -22,7 +22,7 @@ export const ProfilePage = () => {
     dispatch(fetchAllUsers())
   },[])
 
-  const findUser = userData.allUsers.users?.find(user => user.username === username);
+  const findUser = userData.allUsers?.find(user => user.username === username);
   if(findUser?.username === userData.user?.username) {
     currentUser = userData.user;
   }

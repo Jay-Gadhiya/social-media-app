@@ -14,6 +14,7 @@ export const HomePage = () => {
     const dispatch = useDispatch();
     const authUser = useSelector(store => store.user);
     const postData = useSelector(store => store.post);
+    const { allUsers } = useSelector(store => store.user);
 
 
     useEffect(() => {
@@ -40,10 +41,11 @@ export const HomePage = () => {
                         </div>
                         <p className="text-blue-400 mt-4 mb-4 text-center ml-5">Suggestions for you</p>
                         <div className="flex flex-col gap-3 ">
-                            <User imgUrl = {"https://picsum.photos/seed/picsum/200/300"}/>
-                            <User imgUrl = {"https://picsum.photos/seed/picsum/200/300"}/>
-                            <User imgUrl = {"https://picsum.photos/seed/picsum/200/300"}/>
-                            <User imgUrl = {"https://picsum.photos/seed/picsum/200/300"}/>
+                            {
+                                allUsers?.map(item => (
+                                    <User key={item?._id} user={item} />
+                                ))
+                            }
                         </div>
                     </div>
                     <div className="w-full md:hidden flex justify-between fixed bottom-0 p-3 bg-gray-800">

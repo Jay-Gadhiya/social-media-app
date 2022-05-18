@@ -116,7 +116,7 @@ const userSlice = createSlice({
         })
 
         builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-            state.allUsers = action.payload;
+            state.allUsers = action.payload.users;
         })
 
         builder.addCase(fetchAllUsers.rejected, (state, action) => {
