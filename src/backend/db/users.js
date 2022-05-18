@@ -1,11 +1,10 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
-import img1 from "../../assets/dp1.jpeg";
-import img2 from "../../assets/dp2.jpeg";
-import img3 from "../../assets/dp3.jpeg";
-import img4 from "../../assets/dp4.jpeg";
-import img5 from "../../assets/dp5.jpeg";
-import img6 from "../../assets/dp6.jpeg";
+import img1 from "../../assets/dpp1.jpeg";
+import img2 from "../../assets/dpp2.jpeg";
+import img3 from "../../assets/dpp3.jpg";
+import img4 from "../../assets/dpp4.jpg";
+import img5 from "../../assets/dpp5.jpg";
 
 
 /**
@@ -49,7 +48,7 @@ export const users = [
     email : "cherry@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//Cherry.com",
-    img : img2,
+    img : img5,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -63,7 +62,7 @@ export const users = [
     bio: "Hy, i am aspiring web developer",
     website : "https//liza.com",
     createdAt: formatDate(),
-    img : img6,
+    img : img2,
     updatedAt: formatDate(),
   },
   {
@@ -88,7 +87,7 @@ export const users = [
     email : "jack@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//jack.com",
-    img : img5,
+    img : img3,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
