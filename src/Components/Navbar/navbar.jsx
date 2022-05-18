@@ -19,7 +19,7 @@ export const Navbar = () => {
         }
         <nav className="shadow-md  p-3 top-0 sticky z-10 bg-neutral-800">
             <div className="flex justify-between items-center max-w-4xl m-auto">
-                <h1 className="text-3xl text-[#fde4c3] font-merienda">FanField</h1>
+                <h1 className="lg:text-3xl sm:text-2xl text-[#fde4c3] font-merienda">FanField</h1>
                 <input 
                     className="mx-2 w-full max-w-sm p-1 pl-2 outline-none 
                     rounded-md border-slate-300 

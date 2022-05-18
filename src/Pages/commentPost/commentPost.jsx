@@ -41,7 +41,7 @@ export const CommentPostPage = () => {
                 
                 <form onSubmit={(e) => commentHandler(e) } className='flex justify-between'>
                     <input onChange={(e) => setCommentData(pre => ({...pre, text : e.target.value}))} value={commentData.text}  type="text" placeholder='Add a comment...' className='mb-3 bg-transparent w-2/3 p-2 text-white outline-none' required/>
-                    <button className="modal-close  px-3 text-base bg-transparent  rounded-md text-white hover:bg-cyan-500">Post</button>
+                    <button className="modal-close  px-3 h-8 text-base bg-transparent  rounded-md text-white hover:bg-cyan-500">Post</button>
                 </form>
 
                 {

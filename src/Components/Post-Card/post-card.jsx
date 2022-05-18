@@ -6,7 +6,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditPostModal } from '../Modal/editPostModal';
-import { fetchAllComments, fetchAllPost, fetchPostComment } from '../../features/posts/postSlice';
+import { fetchDeletePost } from '../../features/posts/postSlice';
 import { Link } from 'react-router-dom';
 
 
@@ -15,8 +15,9 @@ export const PostCard = ({ postData }) => {
     const [openMenu, setOpenMenu] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
-    const { token, user } = useSelector(store => store.user);
+    const { token, user, allUsers } = useSelector(store => store.user);
     const postId = postData?._id;
+    const findUser = allUsers?.find(user => user.username === postData.username);
 
 
     const deletePostHandler = () => {
@@ -39,7 +40,7 @@ export const PostCard = ({ postData }) => {
         }
         <div className="w-full max-w-xl  font-roboto pb-3 mb-3 pr-1 rounded-lg bg-gray-700">
             <div className="flex items-center gap-3 p-3">
-                <img className='w-9 h-9 rounded-full' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" />
+                <img className='w-9 h-9 rounded-full' src={findUser?.img} alt="profile-img" />
                 <p className='text-white'>{postData?.username}</p>
                 <div className='ml-auto relative'>
                     <BsThreeDotsVertical onClick={() => setOpenMenu(open => !open)} className='text-white text-lg cursor-pointer' />
