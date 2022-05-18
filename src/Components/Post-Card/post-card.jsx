@@ -85,6 +85,10 @@ export const PostCard = ({ postData }) => {
             <p className='font-bold text-sm pl-3 mt-2 text-white'>{postData?.likes?.likeCount} likes</p>
             <p className='text-sm pl-3 text-gray-300'><span className='font-bold '>{postData?.username} </span>{postData?.caption}</p>
             <small className='text-gray-400 pl-3'>12 hours ago</small>
+            <div className='flex justify-between'>
+                <input type="text" placeholder='Add a comment...' className='bg-transparent w-2/3 p-2 text-white outline-none' />
+                <button className="modal-close  px-3 text-base bg-transparent  rounded-md text-white hover:bg-cyan-500">Post</button>
+            </div>
         </div>
         </>
     )
