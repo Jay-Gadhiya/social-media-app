@@ -2,31 +2,94 @@ import { BsHeart } from 'react-icons/bs';
 import { FaRegComment } from 'react-icons/fa';
 import { IoPaperPlaneOutline } from 'react-icons/io5';
 import { BsBookmark } from 'react-icons/bs';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchDeletePost } from '../../features/posts/postSlice';
+import { EditPostModal } from '../Modal/editPostModal';
 
-export const PostCard = () => {
+
+export const PostCard = ({ postData }) => {
+
+    const [openMenu, setOpenMenu] = useState(false);
+    const [postsData, setPostsData] = useState({caption:postData?.caption, content:postData?.content, image: postData?.image});
+    const [showModal, setShowModal] = useState(false);
+    const dispatch = useDispatch();
+    const { token, user } = useSelector(store => store.user);
+    const postId = postData?._id;
+
+
+    const deletePostHandler = () => {
+        dispatch(fetchDeletePost({token, postId}));
+        setOpenMenu(open => !open);
+    }
+
+    const editHandler = () => {
+        setOpenMenu(open => !open);
+        setShowModal(true);
+    }
+
+
     return (
-        <div className="w-full max-w-xl  border-2 font-roboto pb-3 mb-3 rounded-lg">
+        <>
+        {
+            showModal 
+            &&
+            <EditPostModal setShowModal={setShowModal} setPostsData={setPostsData} postsData={postsData} postId={postData?._id}  />
+        }
+        <div className="w-full max-w-xl  font-roboto pb-3 mb-3 pr-1 rounded-lg bg-gray-700">
             <div className="flex items-center gap-3 p-3">
                 <img className='w-9 h-9 rounded-full' src="https://nebulaui.netlify.app/images/medium.jpeg" alt="profile-img" />
-                <p>Admin user</p>
+                <p className='text-white'>{postData?.username}</p>
+                <div className='ml-auto relative'>
+                    <BsThreeDotsVertical onClick={() => setOpenMenu(open => !open)} className='text-white text-lg cursor-pointer' />
+                    {
+                        openMenu
+                        &&
+                        <div className='absolute top-4 right-4 py-1 px-2 bg-gray-600  rounded-md flex gap-1 text-white flex-col'>
+                            {
+                                user?.username === postData?.username
+                                ?
+                                <>
+                                    <div onClick={editHandler} className='cursor-pointer text-base hover:text-cyan-500'>Edit</div>
+                                    <div onClick={deletePostHandler} className='cursor-pointer text-base hover:text-cyan-500'>Delete</div>
+                                </>
+                                :
+                                    <div onClick={() => setOpenMenu(open => !open)} className='cursor-pointer text-base hover:text-cyan-500'>Unfollow</div>
+                                
+                            }
+                            
+                        </div>
+                    }
+                    
+                </div>
             </div>
-            <div className="w-full pl-3 pr-2">
-                {/* <img src="https://media.smallbiztrends.com/2021/01/Active-Social-Media-Presence.png" alt="Image" /> */}
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim commodi, optio doloremque ab repellat amet esse, sed, recusandae laboriosam obcaecati hic corrupti corporis!
+            <div className="w-full pl-3 pr-2 ">
+                {
+                    postData?.image !== "" 
+                    &&
+                    <img className='rounded-md bg-cover bg-center w-full' src={postData?.image} alt="Image" />
+                }
             </div>
+            <p className='text-white pl-3 mb-1 mt-1'>{postData?.content}</p>
             <div className='flex justify-between p-3 items-center'>
                 <div className='flex gap-4'>
-                    <BsHeart className='text-2xl cursor-pointer'/>
-                    <FaRegComment className='text-2xl cursor-pointer'/>
-                    <IoPaperPlaneOutline className='text-2xl cursor-pointer'/>
+                    <BsHeart className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
+                    <FaRegComment className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
+                    <IoPaperPlaneOutline className='text-[1.4rem] text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
                 </div>
                 <div>
-                    <BsBookmark className='text-2xl cursor-pointer'/>
+                    <BsBookmark className='text-xl text-white cursor-pointer hover:text-blue-500 hover:scale-105'/>
                 </div>
             </div>
-            <p className='font-bold text-sm pl-3 mt-2'>30 Likes</p>
-            <p className='text-sm pl-3'><span className='font-bold'>Admin user</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis, voluptas!</p>
-            <small className='text-gray-500 pl-3'>12 hours ago</small>
+            <p className='font-bold text-sm pl-3 mt-2 text-white'>{postData?.likes?.likeCount} likes</p>
+            <p className='text-sm pl-3 text-gray-300'><span className='font-bold '>{postData?.username} </span>{postData?.caption}</p>
+            <small className='text-gray-400 pl-3'>12 hours ago</small>
+            <form className='flex justify-between'>
+                <input type="text" placeholder='Add a comment...' className='bg-transparent w-2/3 p-2 text-white outline-none' required/>
+                <button className="modal-close  px-3 text-base bg-transparent  rounded-md text-white hover:bg-cyan-500">Post</button>
+            </form>
         </div>
+        </>
     )
 }

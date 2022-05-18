@@ -1,5 +1,12 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
+import img1 from "../../assets/dpp1.jpeg";
+import img2 from "../../assets/dpp2.jpeg";
+import img3 from "../../assets/dpp3.jpg";
+import img4 from "../../assets/dpp4.jpg";
+import img5 from "../../assets/dpp5.jpg";
+
+
 /**
  * User Database can be added here.
  * You can add default users of your wish with different attributes
@@ -23,12 +30,12 @@ export const users = [
     _id: uuid(),
     firstName: "John",
     lastName: "Quil",
-    username: "JohnQuil55",
+    username: "JohnQuil",
     password: "john23",
     email : "john@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//john.com",
-    img : "",
+    img : img1,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -36,12 +43,12 @@ export const users = [
     _id: uuid(),
     firstName: "Cherry",
     lastName: "Blossom",
-    username: "Cherry34",
+    username: "cherryblossom",
     password: "cherry123",
     email : "cherry@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//Cherry.com",
-    img : "",
+    img : img5,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -49,25 +56,25 @@ export const users = [
     _id: uuid(),
     firstName: "Liza",
     lastName: "Doolittle",
-    username: "Liza444",
+    username: "lizadoolittle",
     password: "liza123",
     email : "liza@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//liza.com",
     createdAt: formatDate(),
-    img : "",
+    img : img2,
     updatedAt: formatDate(),
   },
   {
     _id: uuid(),
     firstName: "Chris",
     lastName: "Bacon",
-    username: "ChrisVolter",
+    username: "chrisbacon",
     password: "chris123",
     email : "chris@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//chris.com",
-    img : "",
+    img : img4,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -75,12 +82,12 @@ export const users = [
     _id: uuid(),
     firstName: "Jack",
     lastName: "Aranda",
-    username: "jack007",
+    username: "jackaranda",
     password: "jack123",
     email : "jack@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//jack.com",
-    img : "",
+    img : img3,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

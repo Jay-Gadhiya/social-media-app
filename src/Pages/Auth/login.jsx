@@ -34,7 +34,7 @@ export const Login = () => {
                     <img src={loginImg} alt="image" className="w-full" />
                 </div>
                 <form onSubmit={(e) => loginHandler(e)} className="flex flex-col p-3 border gap-2 w-full max-w-[20rem] rounded-lg">
-                    <h1 className="font-merienda text-4xl text-center mb-20">FanField</h1>
+                    <h1 className="font-merienda text-4xl text-center mb-20 text-[#fde4c3]">FanField</h1>
 
                     <input 
                     className=" w-full p-2 pl-2 focus: outline-none 
@@ -54,10 +54,10 @@ export const Login = () => {
                     onChange={(e) => setUserData(pre => ({...pre, password : e.target.value}))} 
                     type="password" id="password" placeholder="pasword*" value={userData.password} required/>
 
-                    <button type="button" onClick={guestLoginHandler} className="rounded-md border p-1 w-full outline-none hover:bg-blue-500 hover:text-white">Login as a guest</button>
-                    <button  className="rounded-md border p-1  w-full outline-none bg-blue-500 text-white hover:bg-blue-600">Login</button>
+                    <button type="button" onClick={guestLoginHandler} className="text-white rounded-md  p-1 w-full outline-none hover:bg-blue-500 hover:text-white">Login as a guest</button>
+                    <button  className="rounded-md  p-1  w-full outline-none bg-cyan-500 text-white hover:bg-cyan-600">Login</button>
                     <p className="text-center">OR</p>
-                    <Link to="/signup"><p className="cursor-pointer text-lg text-center">Don't have an account? <span className="text-sky-600">Sign Up</span></p></Link>
+                    <Link to="/signup"><p className="cursor-pointer text-lg text-center text-white">Don't have an account? <span className="text-sky-600">Sign Up</span></p></Link>
                 </form>
             </main>
         </>
