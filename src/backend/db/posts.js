@@ -67,7 +67,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "shubhamrow",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -76,7 +76,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "sohammalik",
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -104,7 +104,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "rajendra",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -113,7 +113,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "ranapratap",
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -141,7 +141,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "mahendra",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -150,7 +150,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "kanchana",
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -178,7 +178,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "mayank",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -187,7 +187,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "kapilsharma",
         text: "Wow!",
         votes: {
           upvotedBy: [],
@@ -215,7 +215,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "shubhamsoni",
+        username: "vaibhavsingh",
         text: "Interesting",
         votes: {
           upvotedBy: [],
@@ -224,7 +224,7 @@ export const posts = [
       },
       {
         _id: uuid(),
-        username: "sohamshah",
+        username: "hetanshree",
         text: "Wow!",
         votes: {
           upvotedBy: [],

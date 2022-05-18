@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchEditPost } from "../../features/posts/postSlice";
 
 
-export const EditPostModal = ({ setShowModal, setPostsData, postsData, postId }) => {
+export const EditPostModal = ({ setShowModal, postId, itemData }) => {
 
     const dispatch = useDispatch();
     const authUser = useSelector(store => store.user);
+    const [postsData, setPostsData] = useState({caption:itemData?.caption, content:itemData?.content, image: itemData?.image});
     const token = authUser?.token;
     const postData = postsData;
 

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addCommentService, getCommentsOfPostService } from "../../services/commentService";
 import { createPostService, deletePostService, editPostService, getAllPostService, getPostByIdService, getPostByUserNameService } from "../../services/postServices";
 
 
@@ -57,6 +58,25 @@ export const fetchEditPost = createAsyncThunk("post/fetchEditPost", async ({toke
     try {
         const response = await editPostService(token, postId, postData);
         return response.data
+    } catch (error) {
+        return error;
+    }
+})
+
+export const fetchAllComments = createAsyncThunk("post/fetchAllComments", async (postId) => {
+    try {
+        const response = await getCommentsOfPostService(postId);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+})
+
+export const fetchPostComment = createAsyncThunk("post/fetchPostComment", async ({token, postId, commentData}) => {
+    try {
+        const {data : { comments }} = await addCommentService(token, postId, commentData);
+        return { comments, postId };
+
     } catch (error) {
         return error;
     }
@@ -151,6 +171,35 @@ const postSlice = createSlice({
 
         builder.addCase(fetchEditPost.rejected, (state, action) => {
             state.error = action.payload;
+        })
+
+
+        // all comments
+        builder.addCase(fetchAllComments.pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchAllComments.fulfilled, (state, action) => {
+            state.posts = action.payload?.comments;
+        })
+
+        builder.addCase(fetchAllComments.rejected, (state, action) => {
+            state.error = action.payload
+        })
+
+
+         // add comments
+         builder.addCase(fetchPostComment .pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchPostComment.fulfilled, (state, { payload }) => {
+            const postIndex = state.posts.findIndex(post => post._id === payload.postId);
+            state.posts[postIndex].comments = payload.comments;
+        })
+
+        builder.addCase(fetchPostComment.rejected, (state, action) => {
+            state.error = action.payload
         })
     }
 })

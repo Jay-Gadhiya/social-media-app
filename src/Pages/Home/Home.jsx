@@ -21,7 +21,6 @@ export const HomePage = () => {
         dispatch(fetchAllUsers());
         dispatch(fetchAllPost());
     }, [])
-    
 
 
     return(

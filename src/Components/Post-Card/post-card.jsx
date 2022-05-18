@@ -3,16 +3,16 @@ import { FaRegComment } from 'react-icons/fa';
 import { IoPaperPlaneOutline } from 'react-icons/io5';
 import { BsBookmark } from 'react-icons/bs';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchDeletePost } from '../../features/posts/postSlice';
 import { EditPostModal } from '../Modal/editPostModal';
+import { fetchAllComments, fetchAllPost, fetchPostComment } from '../../features/posts/postSlice';
+import { Link } from 'react-router-dom';
 
 
 export const PostCard = ({ postData }) => {
 
     const [openMenu, setOpenMenu] = useState(false);
-    const [postsData, setPostsData] = useState({caption:postData?.caption, content:postData?.content, image: postData?.image});
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     const { token, user } = useSelector(store => store.user);
@@ -35,7 +35,7 @@ export const PostCard = ({ postData }) => {
         {
             showModal 
             &&
-            <EditPostModal setShowModal={setShowModal} setPostsData={setPostsData} postsData={postsData} postId={postData?._id}  />
+            <EditPostModal setShowModal={setShowModal}  postId={postData?._id} itemData = {postData}  />
         }
         <div className="w-full max-w-xl  font-roboto pb-3 mb-3 pr-1 rounded-lg bg-gray-700">
             <div className="flex items-center gap-3 p-3">
@@ -75,7 +75,7 @@ export const PostCard = ({ postData }) => {
             <div className='flex justify-between p-3 items-center'>
                 <div className='flex gap-4'>
                     <BsHeart className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
-                    <FaRegComment className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
+                  <Link to={`/comment/${postData.id}`} ><FaRegComment className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/></Link>
                     <IoPaperPlaneOutline className='text-[1.4rem] text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
                 </div>
                 <div>
@@ -83,12 +83,8 @@ export const PostCard = ({ postData }) => {
                 </div>
             </div>
             <p className='font-bold text-sm pl-3 mt-2 text-white'>{postData?.likes?.likeCount} likes</p>
-            <p className='text-sm pl-3 text-gray-300'><span className='font-bold '>{postData?.username} </span>{postData?.caption}</p>
+            <p className='text-sm pl-3 text-gray-300'><span className='font-bold text-white'>{postData?.username}</span> {postData?.caption}</p>
             <small className='text-gray-400 pl-3'>12 hours ago</small>
-            <form className='flex justify-between'>
-                <input type="text" placeholder='Add a comment...' className='bg-transparent w-2/3 p-2 text-white outline-none' required/>
-                <button className="modal-close  px-3 text-base bg-transparent  rounded-md text-white hover:bg-cyan-500">Post</button>
-            </form>
         </div>
         </>
     )
