@@ -43,6 +43,8 @@ export const HomePage = () => {
                         <div className="flex flex-col gap-3 ">
                             {
                                 allUsers?.map(item => (
+                                    item?.username !== authUser.user?.username
+                                    &&
                                     <User key={item?._id} user={item} />
                                 ))
                             }

@@ -1,5 +1,13 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
+import img1 from "../../assets/dp1.jpeg";
+import img2 from "../../assets/dp2.jpeg";
+import img3 from "../../assets/dp3.jpeg";
+import img4 from "../../assets/dp4.jpeg";
+import img5 from "../../assets/dp5.jpeg";
+import img6 from "../../assets/dp6.jpeg";
+
+
 /**
  * User Database can be added here.
  * You can add default users of your wish with different attributes
@@ -28,7 +36,7 @@ export const users = [
     email : "john@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//john.com",
-    img : "",
+    img : img1,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -41,7 +49,7 @@ export const users = [
     email : "cherry@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//Cherry.com",
-    img : "",
+    img : img2,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -55,7 +63,7 @@ export const users = [
     bio: "Hy, i am aspiring web developer",
     website : "https//liza.com",
     createdAt: formatDate(),
-    img : "",
+    img : img6,
     updatedAt: formatDate(),
   },
   {
@@ -67,7 +75,7 @@ export const users = [
     email : "chris@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//chris.com",
-    img : "",
+    img : img4,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -80,7 +88,7 @@ export const users = [
     email : "jack@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//jack.com",
-    img : "",
+    img : img5,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
