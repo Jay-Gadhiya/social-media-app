@@ -12,11 +12,13 @@ export const Navbar = () => {
     const authUser = useSelector(store => store.user);
     const [showModal, setShowModal] = useState(false);
 
+
     return (
         <>
         {
             showModal && <AddPostModal setShowModal={setShowModal} />   
         }
+
         <nav className="shadow-md  p-3 top-0 sticky z-10 bg-neutral-800">
             <div className="flex justify-between items-center max-w-4xl m-auto">
                 <h1 className="lg:text-3xl sm:text-2xl text-[#fde4c3] font-merienda">FanField</h1>
@@ -34,7 +36,26 @@ export const Navbar = () => {
                    <Link to="/bookmark"><BsFillBookmarkFill className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link>
                    
                     <div className="w-8 h-8 cursor-pointer">
-                       <Link to={`/profile/${authUser.user?.username}`}><img className=' w-8 h-8 rounded-full' src={authUser.user?.img} alt="profile-img" /></Link>
+                        {
+                            authUser?.token
+                            &&
+                            <>
+                            {
+                                authUser.user?.img !== ""
+                                ?
+                                <Link to={`/profile/${authUser.user?.username}`}><img className=' w-8 h-8 rounded-full' src={authUser.user?.img} alt="profile-img" /></Link>
+                                :
+                                <Link to={`/profile/${authUser.user?.username}`}>
+                                    <div 
+                                        className=' w-8 h-8 rounded-full border 
+                                        border-sky-50 flex justify-center items-center text-white text-sm
+                                        bg-cyan-600'>{authUser.user?.firstName[0]}{authUser.user?.lastName[0]}
+                                    </div>
+                                </Link>
+
+                            }
+                            </>
+                        }
                     </div>
                 </div>
             </div>

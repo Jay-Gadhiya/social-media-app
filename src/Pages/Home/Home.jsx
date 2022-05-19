@@ -1,8 +1,4 @@
 import { User } from "../../Components/User/user"
-import { ImHome } from 'react-icons/im';
-import { MdAddBox } from 'react-icons/md';
-import { MdExplore } from 'react-icons/md';
-import { IoNotificationsSharp } from 'react-icons/io5';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchAllUsers } from "../../features/users/userSlice";
@@ -36,8 +32,19 @@ export const HomePage = () => {
                     </div>
                     <div className="w-max h-max mt-5 hidden lg:block">
                         <div className="flex gap-2 justify-center items-center">
-                            <img className='w-16 h-16 rounded-full' src={authUser.user?.img} alt="profile-img" />
-                           <Link to={`/profile/${authUser.user?.username}`} ><p className="text-white">{authUser.user?.username}</p></Link>
+                            {
+                                authUser.user?.img === ""
+                                ?
+                                <div 
+                                    className=' w-16 h-16 rounded-full border-2 
+                                    border-sky-50 flex justify-center items-center text-white text-xl
+                                    bg-cyan-600'>{authUser.user?.firstName[0]}{authUser.user?.lastName[0]}
+                                </div>
+                                :
+                                <img className='w-16 h-16 rounded-full' src={authUser.user?.img} alt="profile-img" />
+
+                            }
+                            <Link to={`/profile/${authUser.user?.username}`} ><p className="text-white">{authUser.user?.username}</p></Link>
                         </div>
                         <p className="text-blue-400 mt-4 mb-4 text-center ml-5">Suggestions for you</p>
                         <div className="flex flex-col gap-3 ">
@@ -49,12 +56,6 @@ export const HomePage = () => {
                                 ))
                             }
                         </div>
-                    </div>
-                    <div className="w-full md:hidden flex justify-between fixed bottom-0 p-3 bg-gray-800">
-                        <ImHome className='text-2xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
-                        <MdAddBox className='text-3xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
-                        <MdExplore className='text-3xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
-                        <IoNotificationsSharp className='text-3xl cursor-pointer hover:text-cyan-500 text-zinc-400'/>
                     </div>
             </main>
         </>

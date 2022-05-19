@@ -15,8 +15,8 @@ export const ProfilePage = () => {
   const navigate = useNavigate();
   const { username } = useParams();
   let currentUser = '';
-  const alternateImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD116U9ZCk8bEaanCeB5rSCC2uqY5Ka_2_EA&usqp=CAU";
   const { token } = userData;
+
 
   useEffect(() => {
     dispatch(fetchAllUsers())
@@ -25,7 +25,7 @@ export const ProfilePage = () => {
   const authUser = userData.allUsers.find(item => item.username === userData.user.username);
   const isFollowed = authUser?.following.find(item => item.username === username);
   const findUser = userData.allUsers?.find(user => user.username === username);
-  const postsCount = posts.filter(item => item.username === findUser.username);
+  const postsCount = posts.filter(item => item.username === findUser?.username);
 
   if(findUser?.username === userData.user?.username) {
     currentUser = userData.user;
@@ -33,7 +33,7 @@ export const ProfilePage = () => {
   else {
       currentUser = findUser;
   }
-  const userId = findUser._id;
+  const userId = findUser?._id;
 
   const logOutHandler = () => {
       dispatch(logoutUser());
@@ -60,7 +60,17 @@ export const ProfilePage = () => {
         <div className="max-w-2xl mx-auto"> 
             <div className="px-3 py-4">  
                 <div className="flex flex-col gap-1 text-center">
-                    <img className='block mx-auto bg-center bg-no-repeat bg-cover w-24 h-24 rounded-full border-2 border-sky-50' src={currentUser?.img} alt='img' />
+                    {
+                        userData.user?.img === ""
+                        ?
+                        <div 
+                        className='mx-auto w-24 h-24 rounded-full border-2 
+                        border-sky-50 flex justify-center items-center text-white text-2xl
+                        bg-cyan-600'>{userData.user?.firstName[0]}{userData.user?.lastName[0]}</div>
+                        :
+                        <img className='block mx-auto bg-center bg-no-repeat bg-cover w-24 h-24 rounded-full border-2 border-sky-50' src={currentUser?.img} alt='img' />
+
+                    }
                     <p className="font-serif font-bold text-white"> {currentUser?.username} </p>
                     <span className="text-sm text-gray-300">{currentUser?.firstName} {currentUser?.lastName}</span>
                     <span className="text-sm text-gray-300">{currentUser?.bio}</span>
@@ -77,7 +87,7 @@ export const ProfilePage = () => {
                         <span className="text-gray-400">Followers</span>
                     </div>
                     <div className="font-semibold text-center mx-4">
-                        <p className="text-slate-300">{findUser.following.length}</p>
+                        <p className="text-slate-300">{findUser?.following.length}</p>
                         <span className="text-gray-400">Folowing</span>
                     </div>
                 </div>
@@ -111,7 +121,7 @@ export const ProfilePage = () => {
         <div className=' flex flex-col gap-3 items-center p-1'>
             {
                 posts?.map(item => (
-                    item.username === findUser.username
+                    item.username === findUser?.username
                     &&
                     <PostCard key={item?._id} postData = {item} />
                 ))

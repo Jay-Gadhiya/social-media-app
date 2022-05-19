@@ -130,7 +130,6 @@ export const fetchDislikePost = createAsyncThunk("post/fetchDislikePost", async 
 export const fetchBookmarkPost = createAsyncThunk("post/fetchBookmarkPost", async ({token, postId}) => {
     try {
         const response = await addToBookmarkService(token, postId);
-        console.log(response);
         return response.data;
 
     } catch (error) {

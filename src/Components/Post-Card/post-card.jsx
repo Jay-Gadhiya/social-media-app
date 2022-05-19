@@ -23,7 +23,7 @@ export const PostCard = ({ postData }) => {
     const postId = postData?._id;
     const findUser = allUsers?.find(user => user.username === postData.username);
     const authUser = allUsers.find(item => item.username === user.username);
-    const isFollowed = authUser.following.find(item => item.username === postData.username);
+    const isFollowed = authUser?.following.find(item => item.username === postData.username);
     const userId = findUser?._id;
     
     const isBookmarked = bookmarks.some(curr => curr === postId);
