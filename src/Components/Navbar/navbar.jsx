@@ -1,7 +1,7 @@
 import { ImHome } from 'react-icons/im';
 import { MdAddBox } from 'react-icons/md';
 import { MdExplore } from 'react-icons/md';
-import { IoNotificationsSharp } from 'react-icons/io5';
+import { BsFillBookmarkFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddPostModal } from '../Modal/addPostModal';
@@ -31,7 +31,7 @@ export const Navbar = () => {
                    <Link to="/home"><ImHome className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link> 
                    <MdAddBox  onClick={() => setShowModal(true)} className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
                    <MdExplore className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
-                   <IoNotificationsSharp className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
+                   <BsFillBookmarkFill className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
                    
                     <div className="w-8 h-8 cursor-pointer">
                        <Link to={`/profile/${authUser.user?.username}`}><img className=' w-8 h-8 rounded-full' src={authUser.user?.img} alt="profile-img" /></Link>

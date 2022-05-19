@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EditPostModal } from '../Modal/editPostModal';
 import { fetchDeletePost } from '../../features/posts/postSlice';
 import { Link } from 'react-router-dom';
+import { fetchFollowUser, fetchUnfollowUser } from '../../features/users/userSlice';
 
 
 export const PostCard = ({ postData }) => {
@@ -18,6 +19,9 @@ export const PostCard = ({ postData }) => {
     const { token, user, allUsers } = useSelector(store => store.user);
     const postId = postData?._id;
     const findUser = allUsers?.find(user => user.username === postData.username);
+    const authUser = allUsers.find(item => item.username === user.username);
+    const isFollowed = authUser.following.find(item => item.username === postData.username);
+    const userId = findUser?._id;
 
 
     const deletePostHandler = () => {
@@ -28,6 +32,16 @@ export const PostCard = ({ postData }) => {
     const editHandler = () => {
         setOpenMenu(open => !open);
         setShowModal(true);
+    }
+
+    const followUserHandler = () => {
+        dispatch(fetchFollowUser({token, userId}));
+        setOpenMenu(false);
+    }
+    
+    const unFollowHandler = () => {
+        dispatch(fetchUnfollowUser({token, userId}));
+        setOpenMenu(false);
     }
 
 
@@ -41,7 +55,7 @@ export const PostCard = ({ postData }) => {
         <div className="w-full max-w-xl  font-roboto pb-3 mb-3 pr-1 rounded-lg bg-gray-700">
             <div className="flex items-center gap-3 p-3">
                 <img className='w-9 h-9 rounded-full' src={findUser?.img} alt="profile-img" />
-                <p className='text-white'>{postData?.username}</p>
+               <Link to={`/profile/${postData?.username}`}><p className='text-white'>{postData?.username}</p></Link>
                 <div className='ml-auto relative'>
                     <BsThreeDotsVertical onClick={() => setOpenMenu(open => !open)} className='text-white text-lg cursor-pointer' />
                     {
@@ -56,7 +70,17 @@ export const PostCard = ({ postData }) => {
                                     <div onClick={deletePostHandler} className='cursor-pointer text-base hover:text-cyan-500'>Delete</div>
                                 </>
                                 :
-                                    <div onClick={() => setOpenMenu(open => !open)} className='cursor-pointer text-base hover:text-cyan-500'>Unfollow</div>
+                                <>
+                                    {
+                                        isFollowed
+                                        ?
+                                        <div onClick={unFollowHandler} className='cursor-pointer text-base hover:text-cyan-500'>Unfollow</div>
+                                        :
+                                        <div onClick={followUserHandler} className='cursor-pointer text-base hover:text-cyan-500'>follow</div>
+
+
+                                    }
+                                </>
                                 
                             }
                             

@@ -5,6 +5,7 @@ import img2 from "../../assets/dpp2.jpeg";
 import img3 from "../../assets/dpp3.jpg";
 import img4 from "../../assets/dpp4.jpg";
 import img5 from "../../assets/dpp5.jpg";
+import mainProfile from "../../assets/main-dp.jpeg";
 
 
 /**
@@ -22,7 +23,7 @@ export const users = [
     email : "adarshbalika@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//adarshportfolio.com",
-    img : "https://nebulaui.netlify.app/images/medium.jpeg",
+    img : mainProfile,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

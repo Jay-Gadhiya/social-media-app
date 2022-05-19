@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { followService, unFollowService } from "../../services/followUnfollowService";
 import { editUserService, getAllUsersService, getUserService } from "../../services/userProfileService";
 
 const initialState = {
@@ -36,7 +37,7 @@ export const fetchSignupUserData = createAsyncThunk('user/fetchSignupUserData', 
     
 })
 
-export const fetchAllUsers = createAsyncThunk("userProfile/fetchAllUsers", async () => {
+export const fetchAllUsers = createAsyncThunk("user/fetchAllUsers", async () => {
     try {
         const response = await getAllUsersService();
         if(response.status === 200){
@@ -47,7 +48,7 @@ export const fetchAllUsers = createAsyncThunk("userProfile/fetchAllUsers", async
     }
 })
 
-export const fetchGetUser = createAsyncThunk("userProfile/fetchGetUser", async (userId) => {
+export const fetchGetUser = createAsyncThunk("user/fetchGetUser", async (userId) => {
     try {
         const response = await getUserService(userId);
         if(response.status === 200){
@@ -58,10 +59,33 @@ export const fetchGetUser = createAsyncThunk("userProfile/fetchGetUser", async (
     }
 })
 
-export const fetchEditUser = createAsyncThunk("userProfile/fetchEditUser", async ({userData, token}) => {
+export const fetchEditUser = createAsyncThunk("user/fetchEditUser", async ({userData, token}) => {
     try {
         const response = await editUserService(token, userData);
         if(response.status === 201){
+            return response.data;
+        }
+    } catch (error){
+       console.log(error);
+    }
+})
+
+export const fetchFollowUser = createAsyncThunk("user/fetchFollowUser", async ({token, userId}) => {
+    try {
+        const response = await followService(userId, token);
+        if(response.status === 200){
+            console.log(response.data);
+            return response.data;
+        }
+    } catch (error){
+       console.log(error);
+    }
+})
+
+export const fetchUnfollowUser = createAsyncThunk("user/fetchUnfollowUser", async ({token, userId}) => {
+    try {
+        const response = await unFollowService(userId, token);
+        if(response.status === 200){
             return response.data;
         }
     } catch (error){
@@ -146,6 +170,37 @@ const userSlice = createSlice({
         })
 
         builder.addCase(fetchEditUser.rejected, (state, action) => {
+            state.error = action.payload;
+        })
+
+        // follow 
+        builder.addCase(fetchFollowUser.pending, state => {
+            state.error = "";
+        })
+
+        builder.addCase(fetchFollowUser.fulfilled, (state, { payload : {user, followUser} }) => {
+            state.allUsers = state.allUsers.map(existUser => existUser._id === user._id ? user : existUser);
+
+            state.allUsers = state.allUsers.map(existUser => existUser._id === followUser._id ? followUser : existUser);
+
+        })
+
+        builder.addCase(fetchFollowUser.rejected, (state, action) => {
+            state.error = action.payload;
+        })
+
+        // unfollow 
+        builder.addCase(fetchUnfollowUser.pending, state => {
+            state.error = "";
+        })
+
+        builder.addCase(fetchUnfollowUser.fulfilled, (state, { payload : {user, followUser} } ) => {
+            state.allUsers = state.allUsers.map(existUser => existUser._id === user._id ? user : existUser);
+
+            state.allUsers = state.allUsers.map(existUser => existUser._id === followUser._id ? followUser : existUser);
+        })
+
+        builder.addCase(fetchUnfollowUser.rejected, (state, action) => {
             state.error = action.payload;
         })
     }
