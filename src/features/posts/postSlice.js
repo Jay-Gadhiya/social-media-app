@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { addCommentService, deleteCommentService, editCommentService, getCommentsOfPostService } from "../../services/commentService";
+import { postDislikeService, postLikeService } from "../../services/likeDislikeService";
 import { createPostService, deletePostService, editPostService, getAllPostService, getPostByIdService, getPostByUserNameService } from "../../services/postServices";
 
 
@@ -101,6 +102,28 @@ export const fetchDeleteComment = createAsyncThunk("post/fetchDeleteComment", as
         console.log(error);
     }
 })
+
+export const fetchLikePost = createAsyncThunk("post/fetchLikePost", async ({token, postId}) => {
+    try {
+        const response = await postLikeService(token, postId);
+        return response.data;
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+export const fetchDislikePost = createAsyncThunk("post/fetchDislikePost", async ({token, postId}) => {
+    try {
+        const response = await postDislikeService(token, postId);
+        return response.data;
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+
  
 const postSlice = createSlice({
     name : "post",
@@ -236,8 +259,8 @@ const postSlice = createSlice({
             state.error = action.payload
         })
 
-         // delete comments
-         builder.addCase(fetchDeleteComment .pending, (state, action) => {
+        // delete comments
+        builder.addCase(fetchDeleteComment .pending, (state, action) => {
             state.error = ""
         })
 
@@ -248,6 +271,32 @@ const postSlice = createSlice({
 
         builder.addCase(fetchDeleteComment.rejected, (state, action) => {
             state.error = action.payload
+        })
+
+        // like 
+        builder.addCase(fetchLikePost .pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchLikePost.fulfilled, (state, { payload }) => {
+            state.posts = payload.posts.reverse();
+        })
+
+        builder.addCase(fetchLikePost.rejected, (state, action) => {
+            state.error = action.payload;
+        })
+
+        // dislike 
+        builder.addCase(fetchDislikePost .pending, (state, action) => {
+            state.error = "";
+        })
+
+        builder.addCase(fetchDislikePost.fulfilled, (state, { payload }) => {
+            state.posts = payload.posts.reverse();
+        })
+
+        builder.addCase(fetchDislikePost.rejected, (state, action) => {
+            state.error = action.payload;
         })
     }
 })
