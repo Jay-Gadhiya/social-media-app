@@ -56,7 +56,7 @@ export const Login = () => {
 
                     <button type="button" onClick={guestLoginHandler} className="text-white rounded-md  p-1 w-full outline-none hover:bg-blue-500 hover:text-white">Login as a guest</button>
                     <button  className="rounded-md  p-1  w-full outline-none bg-cyan-500 text-white hover:bg-cyan-600">Login</button>
-                    <p className="text-center">OR</p>
+                    <p className="text-center text-white">OR</p>
                     <Link to="/signup"><p className="cursor-pointer text-lg text-center text-white">Don't have an account? <span className="text-sky-600">Sign Up</span></p></Link>
                 </form>
             </main>

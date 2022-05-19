@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addCommentService, deleteCommentService, editCommentService, getCommentsOfPostService } from "../../services/commentService";
 import { createPostService, deletePostService, editPostService, getAllPostService, getPostByIdService, getPostByUserNameService } from "../../services/postServices";
 
 
@@ -62,6 +63,45 @@ export const fetchEditPost = createAsyncThunk("post/fetchEditPost", async ({toke
     }
 })
 
+export const fetchAllComments = createAsyncThunk("post/fetchAllComments", async (postId) => {
+    try {
+        const response = await getCommentsOfPostService(postId);
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+})
+
+export const fetchPostComment = createAsyncThunk("post/fetchPostComment", async ({token, postId, commentData}) => {
+    try {
+        const {data : { comments }} = await addCommentService(token, postId, commentData);
+        return { comments, postId };
+
+    } catch (error) {
+        return error;
+    }
+})
+
+export const fetchEditComment = createAsyncThunk("post/fetchEditComment", async ({token, postId, commentId, commentData}) => {
+    try {
+        const {data : { comments }} = await editCommentService(token, postId, commentId, commentData);
+        return { comments, postId };
+
+    } catch (error) {
+        return error;
+    }
+})
+
+export const fetchDeleteComment = createAsyncThunk("post/fetchDeleteComment", async ({token, postId, commentId}) => {
+    try {
+        const {data : { comments }} = await deleteCommentService(token, postId, commentId);
+        return { comments, postId };
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+ 
 const postSlice = createSlice({
     name : "post",
     initialState,
@@ -151,6 +191,63 @@ const postSlice = createSlice({
 
         builder.addCase(fetchEditPost.rejected, (state, action) => {
             state.error = action.payload;
+        })
+
+
+        // all comments
+        builder.addCase(fetchAllComments.pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchAllComments.fulfilled, (state, action) => {
+            state.posts = action.payload?.comments;
+        })
+
+        builder.addCase(fetchAllComments.rejected, (state, action) => {
+            state.error = action.payload
+        })
+
+
+        // add comments
+        builder.addCase(fetchPostComment .pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchPostComment.fulfilled, (state, { payload }) => {
+            const postIndex = state.posts.findIndex(post => post._id === payload.postId);
+            state.posts[postIndex].comments = payload.comments;
+        })
+
+        builder.addCase(fetchPostComment.rejected, (state, action) => {
+            state.error = action.payload
+        })
+
+         // edit comments
+         builder.addCase(fetchEditComment .pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchEditComment.fulfilled, (state, { payload }) => {
+            const postIndex = state.posts.findIndex(post => post._id === payload.postId);
+            state.posts[postIndex].comments = payload.comments;
+        })
+
+        builder.addCase(fetchEditComment.rejected, (state, action) => {
+            state.error = action.payload
+        })
+
+         // delete comments
+         builder.addCase(fetchDeleteComment .pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchDeleteComment.fulfilled, (state, { payload }) => {
+            const postIndex = state.posts.findIndex(post => post._id === payload.postId);
+            state.posts[postIndex].comments = payload.comments;
+        })
+
+        builder.addCase(fetchDeleteComment.rejected, (state, action) => {
+            state.error = action.payload
         })
     }
 })
