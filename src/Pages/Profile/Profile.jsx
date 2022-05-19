@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EditProfile } from '../../Components/Modal/edit-profile-modal';
 import { PostCard } from "../../Components/Post-Card/post-card";
-import { fetchAllUsers, logoutUser } from '../../features/users/userSlice';
+import { fetchAllUsers, fetchFollowUser, fetchUnfollowUser, logoutUser } from '../../features/users/userSlice';
 
 export const ProfilePage = () => {
 
   const [showModal, setShowModal] = useState(false);
-  const [img, setImg] = useState("https://nebulaui.netlify.app/images/medium.jpeg");
   const userData = useSelector(state => state.user);
   const { posts } = useSelector(store => store.post);
   const dispatch = useDispatch();
@@ -17,22 +16,36 @@ export const ProfilePage = () => {
   const { username } = useParams();
   let currentUser = '';
   const alternateImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD116U9ZCk8bEaanCeB5rSCC2uqY5Ka_2_EA&usqp=CAU";
+  const { token } = userData;
 
   useEffect(() => {
     dispatch(fetchAllUsers())
   },[])
 
+  const authUser = userData.allUsers.find(item => item.username === userData.user.username);
+  const isFollowed = authUser?.following.find(item => item.username === username);
   const findUser = userData.allUsers?.find(user => user.username === username);
+  const postsCount = posts.filter(item => item.username === findUser.username);
+
   if(findUser?.username === userData.user?.username) {
     currentUser = userData.user;
   }
   else {
       currentUser = findUser;
   }
+  const userId = findUser._id;
 
   const logOutHandler = () => {
       dispatch(logoutUser());
       navigate("/");
+  }
+
+  const followUserHandler = () => {
+    dispatch(fetchFollowUser({token, userId}));
+  }
+
+  const unFollowHandler = () => {
+    dispatch(fetchUnfollowUser({token, userId}));
   }
 
 
@@ -56,15 +69,15 @@ export const ProfilePage = () => {
     
                 <div className="flex justify-center items-center gap-2 my-3">
                     <div className="font-semibold text-center mr-4 ml-10">
-                        <p className="text-slate-300">102</p>
+                        <p className="text-slate-300">{postsCount.length}</p>
                         <span className="text-gray-400">Posts</span>
                     </div>
                     <div className="font-semibold text-center mx-4">
-                        <p className="text-slate-300">102</p>
+                        <p className="text-slate-300">{findUser?.followers.length}</p>
                         <span className="text-gray-400">Followers</span>
                     </div>
                     <div className="font-semibold text-center mx-4">
-                        <p className="text-slate-300">102</p>
+                        <p className="text-slate-300">{findUser.following.length}</p>
                         <span className="text-gray-400">Folowing</span>
                     </div>
                 </div>
@@ -73,10 +86,20 @@ export const ProfilePage = () => {
                     {
                         findUser?.username === userData.user?.username
                         ?
-                        <button onClick={() => setShowModal(true)} className="bg-white border border-blue-500 hover:bg-cyan-500 hover:text-white px-5 py-2 rounded-full ">Edit Profile</button>
+                        <button onClick={() => setShowModal(true)} className="bg-white  hover:bg-cyan-500 hover:text-white px-5 py-2 rounded-full ">Edit Profile</button>
                         :
-                        <button onClick={() => setShowModal(true)} className="bg-white border border-blue-500 hover:bg-blue-500 hover:text-white px-5 py-2 rounded-full ">Edit Profile</button>
+                        <>
+                            {
+                                isFollowed
+                                ?
+                                    <button onClick={unFollowHandler} className="bg-cyan-600 hover:text-white text-white hover:bg-cyan-500 px-5 py-2 rounded-full ">Unfollow</button>
 
+                                :
+                                    <button onClick={followUserHandler}  className="bg-cyan-600 hover:text-white text-white hover:bg-cyan-500 px-5 py-2 rounded-full ">Follow</button>
+
+                            }
+                        </>
+                        
                     }
                     <AiOutlineLogout onClick={logOutHandler} className='text-[2rem] text-white cursor-pointer hover:text-blue-500' />
                 </div>
