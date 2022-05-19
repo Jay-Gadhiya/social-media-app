@@ -2,7 +2,7 @@ import { ImHome } from 'react-icons/im';
 import { MdAddBox } from 'react-icons/md';
 import { MdExplore } from 'react-icons/md';
 import { BsFillBookmarkFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddPostModal } from '../Modal/addPostModal';
 import { useState } from 'react';
@@ -11,6 +11,10 @@ import { useState } from 'react';
 export const Navbar = () => {
     const authUser = useSelector(store => store.user);
     const [showModal, setShowModal] = useState(false);
+
+    const getActiveStyle = ({ isActive }) => ({
+        color: isActive ? "#06b6d4" : "#d4d4d8"
+    });
 
 
     return (
@@ -30,10 +34,10 @@ export const Navbar = () => {
                     " 
                     type="search" id="search" placeholder="Search"/>
                 <div className='flex lg:gap-4 justify-center items-center lg:pr-5'>
-                   <Link to="/home"><ImHome className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link> 
+                   <NavLink style={getActiveStyle} to="/home"><ImHome className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 '/></NavLink> 
                    <MdAddBox  onClick={() => setShowModal(true)} className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
-                   <Link to="/explore"><MdExplore className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link>
-                   <Link to="/bookmark"><BsFillBookmarkFill className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link>
+                   <NavLink style={getActiveStyle} to="/explore"><MdExplore className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 '/></NavLink>
+                   <NavLink style={getActiveStyle} to="/bookmark"><BsFillBookmarkFill className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 '/></NavLink>
                    
                     <div className="w-8 h-8 cursor-pointer">
                         {
