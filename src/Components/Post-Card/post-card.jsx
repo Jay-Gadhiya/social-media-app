@@ -4,10 +4,11 @@ import { IoPaperPlaneOutline } from 'react-icons/io5';
 import { BsBookmark } from 'react-icons/bs';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { BsHeartFill } from 'react-icons/bs';
+import { BsBookmarkCheckFill } from 'react-icons/bs';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditPostModal } from '../Modal/editPostModal';
-import { fetchDeletePost, fetchDislikePost, fetchLikePost } from '../../features/posts/postSlice';
+import { fetchBookmarkPost, fetchDeletePost, fetchDislikePost, fetchLikePost, fetchRemoveBookmark } from '../../features/posts/postSlice';
 import { Link } from 'react-router-dom';
 import { fetchFollowUser, fetchUnfollowUser } from '../../features/users/userSlice';
 
@@ -18,13 +19,15 @@ export const PostCard = ({ postData }) => {
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     const { token, user, allUsers } = useSelector(store => store.user);
+    const { bookmarks, posts } = useSelector(store => store.post);
     const postId = postData?._id;
     const findUser = allUsers?.find(user => user.username === postData.username);
     const authUser = allUsers.find(item => item.username === user.username);
     const isFollowed = authUser.following.find(item => item.username === postData.username);
     const userId = findUser?._id;
-
-
+    
+    const isBookmarked = bookmarks.some(curr => curr === postId);
+ 
     const deletePostHandler = () => {
         dispatch(fetchDeletePost({token, postId}));
         setOpenMenu(open => !open);
@@ -51,6 +54,14 @@ export const PostCard = ({ postData }) => {
 
     const dislikeHandler = () => {
         dispatch(fetchDislikePost({token, postId}));
+    }
+
+    const addToBookmark = () => {
+        dispatch(fetchBookmarkPost({token, postId}));
+    }
+
+    const removeFromBookmark = () => {
+        dispatch(fetchRemoveBookmark({token, postId}));
     }
 
 
@@ -120,7 +131,14 @@ export const PostCard = ({ postData }) => {
                     <IoPaperPlaneOutline className='text-[1.4rem] text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
                 </div>
                 <div>
-                    <BsBookmark className='text-xl text-white cursor-pointer hover:text-blue-500 hover:scale-105'/>
+                    {
+                        isBookmarked
+                        ?
+                        <BsBookmarkCheckFill onClick={removeFromBookmark} className='text-xl text-cyan-500 cursor-pointer hover:text-cyan-500 hover:scale-105'/>
+                        :
+                        <BsBookmark onClick={addToBookmark} className='text-xl text-white cursor-pointer hover:text-blue-500 hover:scale-105'/>
+
+                    }
                 </div>
             </div>
             <p className='font-bold text-sm pl-3 mt-2 text-white'>{postData?.likes?.likeCount} likes</p>
@@ -130,7 +148,7 @@ export const PostCard = ({ postData }) => {
                 <>
                 {
                     postData?.likes?.likedBy.map(liked => (
-                        <p className='font-bold text-sm pl-3 mt-2 text-gray-300'><span className='font-bold text-white'>liked by </span> <Link to={`/profile/${liked.username}`}>{liked.username}</Link></p>
+                        <p key={postData._id} className='font-bold text-sm pl-3 mt-2 text-gray-300'><span className='font-bold text-white'>liked by </span> <Link to={`/profile/${liked.username}`}>{liked.username}</Link></p>
                     ))
                 }
                 </>

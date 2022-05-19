@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { addToBookmarkService, removesFromBookmark } from "../../services/bookmarkService";
 import { addCommentService, deleteCommentService, editCommentService, getCommentsOfPostService } from "../../services/commentService";
 import { postDislikeService, postLikeService } from "../../services/likeDislikeService";
 import { createPostService, deletePostService, editPostService, getAllPostService, getPostByIdService, getPostByUserNameService } from "../../services/postServices";
@@ -7,6 +8,7 @@ import { createPostService, deletePostService, editPostService, getAllPostServic
 const initialState = {
     posts : [],
     post : {},
+    bookmarks : [],
     error : "",
 }
 
@@ -99,7 +101,7 @@ export const fetchDeleteComment = createAsyncThunk("post/fetchDeleteComment", as
         return { comments, postId };
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 })
 
@@ -109,7 +111,8 @@ export const fetchLikePost = createAsyncThunk("post/fetchLikePost", async ({toke
         return response.data;
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
+
     }
 })
 
@@ -119,9 +122,34 @@ export const fetchDislikePost = createAsyncThunk("post/fetchDislikePost", async 
         return response.data;
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
+
     }
 })
+
+export const fetchBookmarkPost = createAsyncThunk("post/fetchBookmarkPost", async ({token, postId}) => {
+    try {
+        const response = await addToBookmarkService(token, postId);
+        console.log(response);
+        return response.data;
+
+    } catch (error) {
+        console.error(error);
+
+    }
+})
+
+export const fetchRemoveBookmark = createAsyncThunk("post/fetchRemoveBookmark", async ({token, postId}) => {
+    try {
+        const response = await removesFromBookmark(token, postId);
+        return response.data;
+
+    } catch (error) {
+        console.error(error);
+
+    }
+})
+
 
 
  
@@ -296,6 +324,32 @@ const postSlice = createSlice({
         })
 
         builder.addCase(fetchDislikePost.rejected, (state, action) => {
+            state.error = action.payload;
+        })
+
+        // Add Bookmark 
+        builder.addCase(fetchBookmarkPost .pending, (state, action) => {
+            state.error = "";
+        })
+
+        builder.addCase(fetchBookmarkPost.fulfilled, (state, { payload }) => {
+            state.bookmarks = payload.bookmarks;
+        })
+
+        builder.addCase(fetchBookmarkPost.rejected, (state, action) => {
+            state.error = action.payload;
+        })
+
+        // Remove Bookmark 
+        builder.addCase(fetchRemoveBookmark .pending, (state, action) => {
+            state.error = "";
+        })
+
+        builder.addCase(fetchRemoveBookmark.fulfilled, (state, { payload }) => {
+            state.bookmarks = payload.bookmarks;
+        })
+
+        builder.addCase(fetchRemoveBookmark.rejected, (state, action) => {
             state.error = action.payload;
         })
     }
