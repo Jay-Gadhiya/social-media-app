@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addCommentService, getCommentsOfPostService } from "../../services/commentService";
+import { addCommentService, deleteCommentService, editCommentService, getCommentsOfPostService } from "../../services/commentService";
 import { createPostService, deletePostService, editPostService, getAllPostService, getPostByIdService, getPostByUserNameService } from "../../services/postServices";
 
 
@@ -82,6 +82,26 @@ export const fetchPostComment = createAsyncThunk("post/fetchPostComment", async 
     }
 })
 
+export const fetchEditComment = createAsyncThunk("post/fetchEditComment", async ({token, postId, commentId, commentData}) => {
+    try {
+        const {data : { comments }} = await editCommentService(token, postId, commentId, commentData);
+        return { comments, postId };
+
+    } catch (error) {
+        return error;
+    }
+})
+
+export const fetchDeleteComment = createAsyncThunk("post/fetchDeleteComment", async ({token, postId, commentId}) => {
+    try {
+        const {data : { comments }} = await deleteCommentService(token, postId, commentId);
+        return { comments, postId };
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+ 
 const postSlice = createSlice({
     name : "post",
     initialState,
@@ -188,8 +208,8 @@ const postSlice = createSlice({
         })
 
 
-         // add comments
-         builder.addCase(fetchPostComment .pending, (state, action) => {
+        // add comments
+        builder.addCase(fetchPostComment .pending, (state, action) => {
             state.error = ""
         })
 
@@ -199,6 +219,34 @@ const postSlice = createSlice({
         })
 
         builder.addCase(fetchPostComment.rejected, (state, action) => {
+            state.error = action.payload
+        })
+
+         // edit comments
+         builder.addCase(fetchEditComment .pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchEditComment.fulfilled, (state, { payload }) => {
+            const postIndex = state.posts.findIndex(post => post._id === payload.postId);
+            state.posts[postIndex].comments = payload.comments;
+        })
+
+        builder.addCase(fetchEditComment.rejected, (state, action) => {
+            state.error = action.payload
+        })
+
+         // delete comments
+         builder.addCase(fetchDeleteComment .pending, (state, action) => {
+            state.error = ""
+        })
+
+        builder.addCase(fetchDeleteComment.fulfilled, (state, { payload }) => {
+            const postIndex = state.posts.findIndex(post => post._id === payload.postId);
+            state.posts[postIndex].comments = payload.comments;
+        })
+
+        builder.addCase(fetchDeleteComment.rejected, (state, action) => {
             state.error = action.payload
         })
     }

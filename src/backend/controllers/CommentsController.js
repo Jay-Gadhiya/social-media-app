@@ -160,7 +160,7 @@ export const deletePostCommentHandler = function (schema, request) {
       (comment) => comment._id !== commentId
     );
     this.db.posts.update({ _id: postId }, post);
-    return new Response(201, {}, { comments: post.comments });
+    return new Response(201, {}, { comments: post.comments  });
   } catch (error) {
     return new Response(
       500,
