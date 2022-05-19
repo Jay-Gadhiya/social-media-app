@@ -31,7 +31,7 @@ export const Navbar = () => {
                    <Link to="/home"><ImHome className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link> 
                    <MdAddBox  onClick={() => setShowModal(true)} className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
                    <MdExplore className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
-                   <BsFillBookmarkFill className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
+                   <Link to="/bookmark"><BsFillBookmarkFill className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link>
                    
                     <div className="w-8 h-8 cursor-pointer">
                        <Link to={`/profile/${authUser.user?.username}`}><img className=' w-8 h-8 rounded-full' src={authUser.user?.img} alt="profile-img" /></Link>
