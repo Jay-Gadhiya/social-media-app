@@ -7,6 +7,7 @@ import { Login } from "./Pages/Auth/login";
 import { Signup } from "./Pages/Auth/signup";
 import { BookmarkPage } from "./Pages/Bookmark/bookmarkPage";
 import { CommentPostPage } from "./Pages/commentPost/commentPost";
+import { ExplorePage } from "./Pages/Explore/explorePage";
 import { HomePage } from "./Pages/Home/Home";
 import { ProfilePage } from "./Pages/Profile/Profile";
 import { RequiresAuth } from "./services/RequiresAuth";
@@ -42,6 +43,12 @@ function App() {
         <Route path="/bookmark" element= {
           <RequiresAuth>
             <BookmarkPage/>
+          </RequiresAuth>
+        } />
+
+        <Route path="/explore" element= {
+          <RequiresAuth>
+            <ExplorePage/>
           </RequiresAuth>
         } />
         

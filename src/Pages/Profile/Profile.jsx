@@ -57,7 +57,7 @@ export const ProfilePage = () => {
             <EditProfile setShowModal={setShowModal} img={currentUser?.img} findUser={findUser} />
 
         }
-        <div className="max-w-2xl mx-auto"> 
+        <div className="max-w-2xl mx-auto mb-[6rem]"> 
             <div className="px-3 py-4">  
                 <div className="flex flex-col gap-1 text-center">
                     {

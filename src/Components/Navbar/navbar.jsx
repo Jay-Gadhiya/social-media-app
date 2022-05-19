@@ -20,19 +20,19 @@ export const Navbar = () => {
         }
 
         <nav className="shadow-md  p-3 top-0 sticky z-10 bg-neutral-800">
-            <div className="flex justify-between items-center max-w-4xl m-auto">
-                <h1 className="lg:text-3xl sm:text-2xl text-[#fde4c3] font-merienda">FanField</h1>
+            <div className="flex justify-between items-center max-w-4xl mx-auto">
+                <h1 className="lg:text-3xl sm:text-xs text-[#fde4c3] font-merienda">ClubMate</h1>
                 <input 
-                    className="mx-2 w-full max-w-sm p-1 pl-2 outline-none 
+                    className="mx-2 w-full max-w-sm md:p-1 xs:p-0 pl-2 outline-none 
                     rounded-md border-slate-300 
                     border-primary focus:border-sky-500 
                     bg-gray-200 focus:bg-slate-50 border
                     " 
                     type="search" id="search" placeholder="Search"/>
-                <div className='flex gap-4 justify-center items-center lg:pr-5'>
+                <div className='flex lg:gap-4 justify-center items-center lg:pr-5'>
                    <Link to="/home"><ImHome className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link> 
                    <MdAddBox  onClick={() => setShowModal(true)} className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
-                   <MdExplore className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/>
+                   <Link to="/explore"><MdExplore className='sm: hidden md:block lg:text-3xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link>
                    <Link to="/bookmark"><BsFillBookmarkFill className='sm: hidden md:block lg:text-2xl cursor-pointer hover:text-cyan-500 text-zinc-300'/></Link>
                    
                     <div className="w-8 h-8 cursor-pointer">

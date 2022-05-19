@@ -10,7 +10,7 @@ export  const BookmarkPage = () => {
 
 
     return (
-        <main className="flex w-full justify-center p-1">
+        <main className="flex w-full justify-center p-1 mb-[3rem]">
 
             {
                 bookmarks.length === 0
