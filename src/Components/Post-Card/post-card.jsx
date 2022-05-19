@@ -3,10 +3,11 @@ import { FaRegComment } from 'react-icons/fa';
 import { IoPaperPlaneOutline } from 'react-icons/io5';
 import { BsBookmark } from 'react-icons/bs';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
+import { BsHeartFill } from 'react-icons/bs';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { EditPostModal } from '../Modal/editPostModal';
-import { fetchDeletePost } from '../../features/posts/postSlice';
+import { fetchDeletePost, fetchDislikePost, fetchLikePost } from '../../features/posts/postSlice';
 import { Link } from 'react-router-dom';
 import { fetchFollowUser, fetchUnfollowUser } from '../../features/users/userSlice';
 
@@ -42,6 +43,14 @@ export const PostCard = ({ postData }) => {
     const unFollowHandler = () => {
         dispatch(fetchUnfollowUser({token, userId}));
         setOpenMenu(false);
+    }
+
+    const likeHandler = () => {
+        dispatch(fetchLikePost({token, postId}));
+    }
+
+    const dislikeHandler = () => {
+        dispatch(fetchDislikePost({token, postId}));
     }
 
 
@@ -99,8 +108,15 @@ export const PostCard = ({ postData }) => {
             <p className='text-white pl-3 mb-1 mt-1'>{postData?.content}</p>
             <div className='flex justify-between p-3 items-center'>
                 <div className='flex gap-4'>
-                    <BsHeart className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
-                  <Link to={`/comment/${postData.id}`} ><FaRegComment className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/></Link>
+                    {
+                        postData?.likes?.likeCount > 0
+                        ?
+                        <BsHeartFill onClick={dislikeHandler} className='text-xl  cursor-pointer text-red-500  hover:scale-105'/>
+                        :
+                        <BsHeart onClick={likeHandler} className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
+
+                    }
+                    <Link to={`/comment/${postData.id}`} ><FaRegComment className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/></Link>
                     <IoPaperPlaneOutline className='text-[1.4rem] text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
                 </div>
                 <div>
@@ -108,6 +124,20 @@ export const PostCard = ({ postData }) => {
                 </div>
             </div>
             <p className='font-bold text-sm pl-3 mt-2 text-white'>{postData?.likes?.likeCount} likes</p>
+            {
+                postData?.likes?.likeCount > 0
+                ?
+                <>
+                {
+                    postData?.likes?.likedBy.map(liked => (
+                        <p className='font-bold text-sm pl-3 mt-2 text-gray-300'><span className='font-bold text-white'>liked by </span> <Link to={`/profile/${liked.username}`}>{liked.username}</Link></p>
+                    ))
+                }
+                </>
+                :
+                <p className='font-bold text-sm pl-3 mt-2 text-cyan-200'>Be the first to like</p>
+
+            }
             <p className='text-sm pl-3 text-gray-300'><span className='font-bold text-white'>{postData?.username}</span> {postData?.caption}</p>
             <small className='text-gray-400 pl-3'>12 hours ago</small>
         </div>
