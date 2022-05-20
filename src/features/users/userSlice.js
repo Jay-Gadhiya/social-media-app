@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { followService, unFollowService } from "../../services/followUnfollowService";
 import { editUserService, getAllUsersService, getUserService } from "../../services/userProfileService";
 
@@ -17,10 +18,11 @@ export const fetchLoginUserData = createAsyncThunk('user/fetchLoginUserData', as
     try {
         const response = await axios.post("/api/auth/login", userData)
         if(response.status === 200){
+            toast.success('Login Successfully!');
             return response.data;
         }
     } catch (error){
-        return error;
+        toast.error('Something went wrong!');
     }
     
 })
@@ -29,10 +31,11 @@ export const fetchSignupUserData = createAsyncThunk('user/fetchSignupUserData', 
     try {
         const response = await axios.post("/api/auth/signup", userData)
         if(response.status === 201){
+            toast.success('Signup Successfully!');
             return response.data;
         }
     } catch (error){
-        return error;
+        toast.error('Something went wrong!');
     }
     
 })
@@ -63,6 +66,7 @@ export const fetchEditUser = createAsyncThunk("user/fetchEditUser", async ({user
     try {
         const response = await editUserService(token, userData);
         if(response.status === 201){
+            toast.success('Profile Updated!');
             return response.data;
         }
     } catch (error){

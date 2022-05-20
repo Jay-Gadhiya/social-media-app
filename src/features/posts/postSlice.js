@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 import { addToBookmarkService, removesFromBookmark } from "../../services/bookmarkService";
 import { addCommentService, deleteCommentService, editCommentService, getCommentsOfPostService } from "../../services/commentService";
 import { postDislikeService, postLikeService } from "../../services/likeDislikeService";
@@ -42,6 +43,7 @@ export const fetchPostByUsername = createAsyncThunk("post/fetchPostByUsername", 
 export const fetchCreatePost = createAsyncThunk("post/fetchCreatePost", async ({postData, token}) => {
     try {
         const response = await createPostService(token, postData);
+        toast.success('Post Uploded!');
         return response.data;
 
     } catch (error) {
@@ -52,6 +54,7 @@ export const fetchCreatePost = createAsyncThunk("post/fetchCreatePost", async ({
 export const fetchDeletePost = createAsyncThunk("post/fetchDeletePost", async ({token, postId}) => {
     try {
         const response = await deletePostService(token, postId);
+        toast.success('Post Deleted!');
         return response.data;
     } catch (error) {
         return error;
@@ -61,6 +64,7 @@ export const fetchDeletePost = createAsyncThunk("post/fetchDeletePost", async ({
 export const fetchEditPost = createAsyncThunk("post/fetchEditPost", async ({token, postId, postData}) => {
     try {
         const response = await editPostService(token, postId, postData);
+        toast.success('Post Updated!');
         return response.data
     } catch (error) {
         return error;
@@ -89,6 +93,7 @@ export const fetchPostComment = createAsyncThunk("post/fetchPostComment", async 
 export const fetchEditComment = createAsyncThunk("post/fetchEditComment", async ({token, postId, commentId, commentData}) => {
     try {
         const {data : { comments }} = await editCommentService(token, postId, commentId, commentData);
+        toast.success('Comment Updated!');
         return { comments, postId };
 
     } catch (error) {
@@ -99,6 +104,7 @@ export const fetchEditComment = createAsyncThunk("post/fetchEditComment", async 
 export const fetchDeleteComment = createAsyncThunk("post/fetchDeleteComment", async ({token, postId, commentId}) => {
     try {
         const {data : { comments }} = await deleteCommentService(token, postId, commentId);
+        toast.success('Comment Deleted!');
         return { comments, postId };
 
     } catch (error) {
@@ -131,6 +137,7 @@ export const fetchDislikePost = createAsyncThunk("post/fetchDislikePost", async 
 export const fetchBookmarkPost = createAsyncThunk("post/fetchBookmarkPost", async ({token, postId}) => {
     try {
         const response = await addToBookmarkService(token, postId);
+        toast.success('Successfully Bookmarked!');
         return response.data;
 
     } catch (error) {
@@ -142,6 +149,7 @@ export const fetchBookmarkPost = createAsyncThunk("post/fetchBookmarkPost", asyn
 export const fetchRemoveBookmark = createAsyncThunk("post/fetchRemoveBookmark", async ({token, postId}) => {
     try {
         const response = await removesFromBookmark(token, postId);
+        toast.success('Removed from Bookmarked!');
         return response.data;
 
     } catch (error) {
