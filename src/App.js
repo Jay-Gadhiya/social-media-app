@@ -10,6 +10,7 @@ import { BookmarkPage } from "./Pages/Bookmark/bookmarkPage";
 import { CommentPostPage } from "./Pages/commentPost/commentPost";
 import { ExplorePage } from "./Pages/Explore/explorePage";
 import { HomePage } from "./Pages/Home/Home";
+import { Page404 } from "./Pages/Page404/page404";
 import { ProfilePage } from "./Pages/Profile/Profile";
 import { RequiresAuth } from "./services/RequiresAuth";
 
@@ -56,6 +57,9 @@ function App() {
             <ExplorePage/>
           </RequiresAuth>
         } />
+
+      <Route path="*" element= {<Page404/>} />
+
         
       </Routes>
     
