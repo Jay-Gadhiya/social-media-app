@@ -5,6 +5,7 @@ import { fetchAllUsers } from "../../features/users/userSlice";
 import { PostCard } from "../../Components/Post-Card/post-card";
 import { fetchAllPost, sortByLatest, sortByOldest, sortByTrending } from "../../features/posts/postSlice";
 import { Link } from "react-router-dom";
+import { LineWave } from "react-loader-spinner";
 
 export const HomePage = () => {
 
@@ -51,13 +52,24 @@ export const HomePage = () => {
                         <button onClick={sortByOldestHandler}  className={`bg-cyan-600 hover:bg-cyan-500 border-b-4 ${activeFilter === "oldest" && "border-orange-500"} text-white text-center py-1 px-4 rounded`}>Oldest</button>
                     </div>
                 <div className="flex gap-4 justify-center">
-                    <div>
-                       {
-                          postData.posts?.map(item => (
-                               <PostCard key={item?._id} postData = {item} />
-                           ))
-                       }
-                    </div>
+                    {
+                        postData.loading
+                        ?
+                        <LineWave
+                            color="cyan"
+                            height={210}
+                            width={210}
+                            ariaLabel="three-circles-rotating"
+                        />
+                        :
+                        <div>
+                        {
+                            postData.posts?.map(item => (
+                                <PostCard key={item?._id} postData = {item} />
+                            ))
+                        }
+                        </div>
+                    }
                     <div className="w-max h-max mt-5 hidden lg:block">
                         <div className="flex gap-2 justify-center items-center">
                             {

@@ -10,6 +10,7 @@ const initialState = {
     post : {},
     bookmarks : [],
     error : "",
+    loading : false,
 }
 
 
@@ -180,15 +181,17 @@ const postSlice = createSlice({
 
         // All post
         builder.addCase(fetchAllPost.pending, state => {
-            state.error = "";
+            state.loading = true;
         })
 
         builder.addCase(fetchAllPost.fulfilled, (state, action) => {
             state.posts = action.payload?.posts.reverse();
+            state.loading = false;
         })
 
         builder.addCase(fetchAllPost.rejected, (state, action) => {
             state.error = action.payload;
+            state.loading = false;
         })
 
 
