@@ -23,7 +23,7 @@ export const User = ({ users }) => {
     return (
         <div className="flex gap-3 items-center justify-between ">
             <div className="flex gap-2 items-center">
-                <img className='w-10 h-10 rounded-full' src={users.img} alt="profile-img" />
+                <img className='w-10 h-10 rounded-full object-cover' src={users.img} alt="profile-img" />
                 <Link to={`/profile/${users?.username}`}> <p className="text-white">{users.username}</p> </Link>
             </div>
             <div>

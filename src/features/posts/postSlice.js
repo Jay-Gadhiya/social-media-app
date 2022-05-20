@@ -156,7 +156,25 @@ const postSlice = createSlice({
     name : "post",
     initialState,
     
-    reducers : {},
+    reducers : {
+        sortByTrending: (state) => {
+            state.posts = state.posts.sort(
+                (a, b) => b.likes.likeCount - a.likes.likeCount
+            );
+        },
+
+        sortByLatest: (state) => {
+        state.posts = state.posts.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        },
+
+        sortByOldest: (state) => {
+        state.posts = state.posts.sort(
+            (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        );
+        },
+    },
 
     extraReducers : (builder) => {
 
@@ -355,3 +373,4 @@ const postSlice = createSlice({
 })
 
 export default postSlice.reducer;
+export const  { sortByLatest, sortByOldest, sortByTrending } = postSlice.actions;

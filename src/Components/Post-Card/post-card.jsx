@@ -21,7 +21,7 @@ export const PostCard = ({ postData }) => {
     const { token, user, allUsers } = useSelector(store => store.user);
     const { bookmarks, posts } = useSelector(store => store.post);
     const postId = postData?._id;
-    const findUser = allUsers?.find(user => user.username === postData.username);
+    const findUser = allUsers?.find(user => user?.username === postData?.username);
     const authUser = allUsers.find(item => item.username === user.username);
     const isFollowed = authUser?.following.find(item => item.username === postData.username);
     const userId = findUser?._id;
@@ -113,7 +113,7 @@ export const PostCard = ({ postData }) => {
                 {
                     postData?.image !== "" 
                     &&
-                    <img className='rounded-md bg-cover bg-center w-full' src={postData?.image} alt="Image" />
+                    <img className='rounded-md bg-cover object-cover w-full' src={postData?.image} alt="Image" />
                 }
             </div>
             <p className='text-white pl-3 mb-1 mt-1'>{postData?.content}</p>
@@ -148,17 +148,17 @@ export const PostCard = ({ postData }) => {
                 <>
                 {
                     postData?.likes?.likedBy.map(liked => (
-                        <p key={postData._id} className='font-bold text-sm pl-3 mt-2 text-gray-300'><span className='font-bold text-white'>liked by </span> <Link to={`/profile/${liked.username}`}>{liked.username}</Link></p>
-                    ))
-                }
+                        <p key={liked._id} className='font-bold text-sm pl-3 mt-2 text-gray-300'><span className='font-bold text-white'>liked by </span> <Link to={`/profile/${liked.username}`}>{liked.username}</Link></p>
+                    ))                }
                 </>
                 :
                 <p className='font-bold text-sm pl-3 mt-2 text-cyan-200'>Be the first to like</p>
 
             }
             <p className='text-sm pl-3 text-gray-300'><span className='font-bold text-white'>{postData?.username}</span> {postData?.caption}</p>
-            <small className='text-gray-400 pl-3'>12 hours ago</small>
+            <small className='text-gray-400 pl-3'>{postData?.createdAt}</small>
         </div>
         </>
     )
 }
+9

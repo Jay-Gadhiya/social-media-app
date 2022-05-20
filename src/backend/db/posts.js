@@ -26,7 +26,7 @@ export const posts = [
     username: "adarshbalika",
     caption : "exploring nature",
     image : image1,
-    createdAt: formatDate(),
+    createdAt: "03:15 PM August 26,2016",
     updatedAt: formatDate(),
 
     comments: [
@@ -84,7 +84,7 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
+    createdAt: "04:20 PM August 26,2016",
     updatedAt: formatDate(),
   },
 
@@ -121,7 +121,7 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
+    createdAt: "06:18 PM August 27,2016",
     updatedAt: formatDate(),
   },
 
@@ -158,7 +158,7 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
+    createdAt: "010:12 AM August 27,2016",
     updatedAt: formatDate(),
   },
 
@@ -166,8 +166,45 @@ export const posts = [
     _id: uuid(),
     content:" Study nature, love nature, stay close to nature. It will never fail you",
     likes: {
-      likeCount: 0,
-      likedBy: [],
+      likeCount: 1,
+      likedBy: [
+        {
+          _id: uuid(),
+          content:"In nature, nothing is perfect and everything is perfect. Trees can be contorted, bent in weird ways, and they're still beautiful",
+          likes: {
+            likeCount: 0,
+            likedBy: [],
+            dislikedBy: [],
+          },
+      
+          username: "adarshbalika",
+          caption : "exploring nature",
+          image : image1,
+          createdAt: formatDate(),
+          updatedAt: formatDate(),
+      
+          comments: [
+            {
+              _id: uuid(),
+              username: "shubhamsoni",
+              text: "Interesting",
+              votes: {
+                upvotedBy: [],
+                downvotedBy: [],
+              },
+            },
+            {
+              _id: uuid(),
+              username: "sohamshah",
+              text: "Wow!",
+              votes: {
+                upvotedBy: [],
+                downvotedBy: [],
+              },
+            },
+          ],
+        },
+      ],
       dislikedBy: [],
     },
 
@@ -195,7 +232,7 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
+    createdAt: "01:15 PM August 26,2016",
     updatedAt: formatDate(),
   },
 
@@ -232,7 +269,7 @@ export const posts = [
         },
       },
     ],
-    createdAt: formatDate(),
+    createdAt: "04:15 PM August 27,2016",
     updatedAt: formatDate(),
   },
 ];

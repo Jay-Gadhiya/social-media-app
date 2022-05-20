@@ -6,6 +6,11 @@ import img3 from "../../assets/dpp3.jpg";
 import img4 from "../../assets/dpp4.jpg";
 import img5 from "../../assets/dpp5.jpg";
 import mainProfile from "../../assets/main-dp.jpeg";
+import dummy1 from "../../assets/dummy1.jpeg";
+import dummy2 from "../../assets/dummy2.jpeg";
+import dummy3 from "../../assets/dummy3.jpeg";
+import dummy4 from "../../assets/dummy4.jpeg";
+import dummy5 from "../../assets/dummy5.jpeg";
 
 
 /**
@@ -36,7 +41,7 @@ export const users = [
     email : "john@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//john.com",
-    img : img1,
+    img : dummy1,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -49,7 +54,7 @@ export const users = [
     email : "cherry@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//Cherry.com",
-    img : img5,
+    img : dummy5,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -63,7 +68,7 @@ export const users = [
     bio: "Hy, i am aspiring web developer",
     website : "https//liza.com",
     createdAt: formatDate(),
-    img : img2,
+    img : dummy3,
     updatedAt: formatDate(),
   },
   {
@@ -75,7 +80,7 @@ export const users = [
     email : "chris@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//chris.com",
-    img : img4,
+    img : dummy2,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -88,7 +93,7 @@ export const users = [
     email : "jack@gmail.com",
     bio: "Hy, i am aspiring web developer",
     website : "https//jack.com",
-    img : img3,
+    img : dummy4,
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

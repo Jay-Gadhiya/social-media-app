@@ -68,7 +68,7 @@ export const ProfilePage = () => {
                         border-sky-50 flex justify-center items-center text-white text-2xl
                         bg-cyan-600'>{userData.user?.firstName[0]}{userData.user?.lastName[0]}</div>
                         :
-                        <img className='block mx-auto bg-center bg-no-repeat bg-cover w-24 h-24 rounded-full border-2 border-sky-50' src={currentUser?.img} alt='img' />
+                        <img className='block mx-auto object-cover bg-cover w-24 h-24 rounded-full border-2 border-sky-50' src={currentUser?.img} alt='img' />
 
                     }
                     <p className="font-serif font-bold text-white"> {currentUser?.username} </p>
