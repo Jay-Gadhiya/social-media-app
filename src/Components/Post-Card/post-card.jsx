@@ -128,7 +128,6 @@ export const PostCard = ({ postData }) => {
 
                     }
                     <Link to={`/comment/${postData.id}`} ><FaRegComment className='text-xl text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/></Link>
-                    <IoPaperPlaneOutline className='text-[1.4rem] text-white cursor-pointer hover:text-cyan-500 hover:scale-105'/>
                 </div>
                 <div>
                     {
