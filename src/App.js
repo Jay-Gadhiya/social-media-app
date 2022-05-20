@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -19,6 +20,10 @@ function App() {
   return (
 
     <>
+    <Toaster
+      position="top-center"
+      reverseOrder={true}
+    />
       <Navbar />
       <MobileMenu />
       <Routes>
