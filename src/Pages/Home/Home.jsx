@@ -22,7 +22,6 @@ export const HomePage = () => {
         || 
         adminUser?.following.some(follower => follower.username === item.username));
     
-    const searchedData = postData.posts.filter(item => item.caption.includes(query) || item.content.includes(query));
 
     useEffect(() => {
         dispatch(fetchAllUsers());
@@ -66,7 +65,7 @@ export const HomePage = () => {
                         :
                         <div>
                         {
-                            postData.posts?.map(item => (
+                            showPosts?.map(item => (
                                 <PostCard key={item?._id} postData = {item} />
                             ))
                         }
