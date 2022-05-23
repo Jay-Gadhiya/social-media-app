@@ -15,12 +15,14 @@ export const HomePage = () => {
     const { allUsers } = useSelector(store => store.user);
     const [activeFilter, setActiveFilter] = useState("");
     const adminUser = allUsers.find(item => item.username === authUser.user?.username);
+    const query = "All my life";
 
     const showPosts = postData.posts.filter(item => 
         item.username === adminUser?.username 
         || 
         adminUser?.following.some(follower => follower.username === item.username));
     
+    const searchedData = postData.posts.filter(item => item.caption.includes(query) || item.content.includes(query));
 
     useEffect(() => {
         dispatch(fetchAllUsers());
@@ -64,7 +66,7 @@ export const HomePage = () => {
                         :
                         <div>
                         {
-                            postData.posts?.map(item => (
+                            searchedData?.map(item => (
                                 <PostCard key={item?._id} postData = {item} />
                             ))
                         }

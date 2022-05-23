@@ -7,7 +7,7 @@ import { createPostService, deletePostService, editPostService, getAllPostServic
 
 
 const initialState = {
-    posts : [],
+    posts : [], 
     post : {},
     bookmarks : [],
     error : "",
