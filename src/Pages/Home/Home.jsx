@@ -66,7 +66,7 @@ export const HomePage = () => {
                         :
                         <div>
                         {
-                            searchedData?.map(item => (
+                            postData.posts?.map(item => (
                                 <PostCard key={item?._id} postData = {item} />
                             ))
                         }
