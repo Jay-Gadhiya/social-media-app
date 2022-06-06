@@ -18,9 +18,9 @@ export const Signup = () => {
 
     return (
         <>
-            <main className="flex lg:justify-center gap-5 items-center w-full h-full m-4">
+            <main className="flex lg:justify-center gap-5 items-center w-full h-full mt-6">
                 <form onSubmit={(e) => signupHandler(e)} className="flex flex-col p-3 border gap-2 w-full max-w-[20rem] rounded-lg">
-                    <h1 className="font-merienda text-4xl text-center mb-10 text-[#fde4c3]">FanField</h1>
+                    <h1 className="font-merienda text-4xl text-center mb-10 text-[#fde4c3]">ClubMate</h1>
                     <input 
                     className=" w-full p-2 pl-2 focus: outline-none 
                     border

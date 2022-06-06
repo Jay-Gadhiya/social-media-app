@@ -41,6 +41,7 @@ export const CommentPostPage = () => {
     const deleteCommentHandler = (commentId) => {
         dispatch(fetchDeleteComment({token, postId, commentId}));
     }
+
  
     return(
         <>
